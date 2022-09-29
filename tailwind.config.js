@@ -8,9 +8,14 @@ module.exports = {
     "./plugins/**/*.{js,ts}",
     "./nuxt.config.{js,ts}",
     "./app.vue",
-  ],  
+  ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: (theme) => ({
+        "login": "url('~/assets/images/image1.jpg')",
+        "footer-texture": "url('/img/footer-texture.png')",
+      }),
+    },
   },
   plugins: [],
-}
+};

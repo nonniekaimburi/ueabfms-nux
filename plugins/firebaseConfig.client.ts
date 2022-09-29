@@ -17,7 +17,8 @@ const firebaseConfig = {
 
   messagingSenderId: config.MESSAGING_SENDER_ID,
 
-  appId: config.APP_ID
+  appId: config.APP_ID,
+  measurementId: config.MEASUREMENT_ID
 
 };
 
