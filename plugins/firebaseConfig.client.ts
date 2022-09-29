@@ -1,5 +1,6 @@
 
 import { initializeApp } from "firebase/app";
+import { initUser } from "~~/composables/auth";
 
 export default defineNuxtPlugin(nuxtApp => {
     // Doing something with nuxtApp
@@ -28,5 +29,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 console.log(app)
 
-
+initUser()
   })
