@@ -5,8 +5,10 @@
           
           
           <div class="w-full text-right">
-          <router-link :to="{ path: '/addfile' }"
-            ><button class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">+ Add File</button></router-link>
+         <nuxt-link :to="{path:'/addfile'}" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
+              <font-awesome-icon icon="fa-solid fa-plus" />
+              <span class="text-sm">Add File</span>
+            </nuxt-link>
         </div>
         </div>
         <div

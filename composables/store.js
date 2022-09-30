@@ -1,9 +1,9 @@
 import {
-    collection,
-    doc,
-    getDoc,
-    getDocs,
-    getFirestore, query, where
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore, query, where
 } from "firebase/firestore";
 
 export const getAllSchools = async () => {
@@ -47,3 +47,42 @@ export const getStudentsToSpecificSchool = async (id) => {
   }
   return students;
 };
+export const addNewStudentFile=async(
+  sclid,
+  Lastname,
+  Firstname,
+  Middlename,
+  school,
+  
+  Location,
+  addition,
+  addition1,
+  addition2,
+  addtion3,
+  kcpe,
+  kcse,
+  birthcert,
+  appform
+) =>{
+  const db = getFirestore();
+  await addDoc(collection(db, "students"), {
+    sclid: sclid,
+    Lastname: Lastname,
+    Firstname: Firstname,
+    Middlename: Middlename,
+    school: school,
+
+    status: "present",
+    Location: Location,
+    createdAt: Timestamp.now(),
+    
+    addition: addition,
+    addition1: addition1,
+    addition2: addition2,
+    addtion3:addtion3,
+    kcpe:kcpe,
+    kcse:kcse,
+    birthcert: birthcert,
+    appform: appform
+  });
+}
