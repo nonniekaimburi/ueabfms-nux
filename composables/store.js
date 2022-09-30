@@ -98,3 +98,40 @@ export const getAllStudentFiles=async()=> {
   });
   return studentsFiles;
 }
+export const getSingleStudent=async(id) =>{
+  const db = getFirestore();
+  var student = null;
+  const ref = doc(db, "students", id);
+  const docSnap = await getDoc(ref);
+  if (docSnap.exists()) {
+    // Convert to City object
+    student = docSnap.data();
+    // Use a City instance method
+  } else {
+    console.log("No such document!");
+  }
+  return student;
+}
+export const newHistory=async(id, file, location, sclid, user, action) =>{
+  const db = getFirestore();
+  await addDoc(collection(db, "history"), {
+    id: id,
+    time: Timestamp.now(),
+    user: user,
+    location: location,
+    file: file,
+    sclid: sclid,
+    action: action,
+  });
+}
+export const getSingleHistory=async(id)=> {
+  const db = getFirestore();
+  var history = null;
+
+  const ref = doc(db, "history", id);
+  const historySnap = await getDoc(ref);
+  if (historySnap.exists()) {
+    history = historySnap.data();
+  }
+  return history;
+}
