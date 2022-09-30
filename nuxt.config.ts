@@ -23,8 +23,17 @@ export default defineNuxtConfig({
       MEASUREMENT_ID: process.env.MEASUREMENT_ID
       }
     },
-    css: ["~/assets/css/styles.css"],
+    css: [
+      "~/assets/css/styles.css",
+      '@fortawesome/fontawesome-svg-core/styles.css'
+    ],
     build: {
+      transpile:[
+        '@fortawesome/vue-fontawesome',
+        '@fortawesome/fontawesome-svg-core',
+        '@fortawesome/pro-solid-svg-icons',
+        '@fortawesome/free-brands-svg-icons'
+      ],
     postcss: {
       postcssOptions: {
         plugins: {
