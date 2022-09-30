@@ -1,11 +1,12 @@
 import {
+  addDoc,
   collection,
   doc,
   getDoc,
   getDocs,
-  getFirestore, query, where
+  getFirestore, query,
+  Timestamp, where
 } from "firebase/firestore";
-
 export const getAllSchools = async () => {
   const db = getFirestore();
   const schools = [];
@@ -85,4 +86,15 @@ export const addNewStudentFile=async(
     birthcert: birthcert,
     appform: appform
   });
+}
+
+export const getAllStudentFiles=async()=> {
+  const db = getFirestore();
+  const studentsFiles = [];
+  const fileSnap = await getDocs(collection(db, "students"));
+  fileSnap.forEach((doc) => {
+    studentsFiles.push({ ...doc.data(), id: doc.id });
+    console.log(doc.id, " => ", doc.data());
+  });
+  return studentsFiles;
 }

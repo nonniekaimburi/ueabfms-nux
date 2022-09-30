@@ -2,15 +2,18 @@
   <!-- correct styling -->
   <form>
     <p class="text-xl text-center font-bold">
-        Add <span class="text-primary">File</span>
-      </p>
+      Add <span class="text-primary">File</span>
+    </p>
+      <p class="text-red-600 text-lg font-normal" v-if="errorMsg">Some required fields have not been field up</p>
     <div class="flex">
-      <div class="m-2 bg-white  border" id="custome">
+      <div class="m-2 bg-white border" id="custome">
         <div class="px-4">
           <div class="flex justify-between">
             <div class="mb-4 w-full mt-2">
               <label class="block text-gray-700 text-sm mb-2" for="username">
+                
                 Student ID:
+
               </label>
               <input
                 class="appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -98,47 +101,44 @@
           Available forms
         </h3>
         <div class="px-4">
-          <div class="mb-2 mx-2 flex flex-row items-center ">
-            <label class=" text-gray-700 text-sm " for="username">
-                KCPE Certificate
+          <div class="mb-2 mx-2 flex flex-row items-center">
+            <label class="text-gray-700 text-sm" for="username">
+              KCPE Certificate
             </label>
             <input
               type="checkbox"
               v-model="s_kcpe"
-              class=" mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              
+              class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
           </div>
-          <div class="mb-2 mx-2 flex flex-row items-center ">
-            <label class=" text-gray-700 text-sm" for="username">
-                KCSE Certificate
+          <div class="mb-2 mx-2 flex flex-row items-center">
+            <label class="text-gray-700 text-sm" for="username">
+              KCSE Certificate
             </label>
             <input
               type="checkbox"
               v-model="s_kcse"
-              class=" mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              
+              class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
           </div>
-          <div class="mb-2 mx-2 flex flex-row items-center ">
-            <label class=" text-gray-700 text-sm " for="username">
-                Birth Certificate
+          <div class="mb-2 mx-2 flex flex-row items-center">
+            <label class="text-gray-700 text-sm" for="username">
+              Birth Certificate
             </label>
             <input
               type="checkbox"
               v-model="s_birthcert"
-              class=" mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              
+              class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
           </div>
-          <div class="mb-2 mx-2 flex flex-row items-center ">
-            <label class=" text-gray-700 text-sm" for="username">
-                Application Form
+          <div class="mb-2 mx-2 flex flex-row items-center">
+            <label class="text-gray-700 text-sm" for="username">
+              Application Form
             </label>
             <input
               type="checkbox"
               v-model="s_appform"
-              class=" mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              class="mx-2 w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               placeholder=""
             />
           </div>
@@ -160,10 +160,10 @@
                   Addition 1:
                 </label>
                 <input
-                class="appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                v-model="s_addition1"
-                placeholder="addition 1"
-              />
+                  class="appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  v-model="s_addition1"
+                  placeholder="addition 1"
+                />
               </div>
             </div>
 
@@ -186,10 +186,10 @@
                   Addition 4:
                 </label>
                 <input
-                class="appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                v-model="s_addition3"
-                placeholder="addition 4"
-              />
+                  class="appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  v-model="s_addition3"
+                  placeholder="addition 4"
+                />
               </div>
             </div>
 
@@ -201,6 +201,7 @@
 
     <div class="flex items-center justify-start mt-2 mb-2">
       <button
+        @click="handleAddStudent"
         type="button"
         class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"
       >
@@ -209,12 +210,14 @@
     </div>
   </form>
   <!-- !correct styling -->
-  
 </template>
 <script setup>
+
 definePageMeta({
   layout: "admin",
 });
+
+const router = useRouter();
 
 const schools = ref([]);
 const s_sclid = ref("");
@@ -232,18 +235,16 @@ const s_middlename = ref("");
 const s_location = ref("");
 const s_school = ref("");
 
+const errorMsg=ref(false)
+
 const handleAddStudent = async () => {
-  if (
-    s_sclid.value &&
-    s_addition.value &&
-    s_addition1.value &&
-    s_addition3.value &&
-    s_firstname.value &&
-    s_lastname.value &&
-    s_middlename.value &&
-    s_location.value &&
-    s_school.value
-  ) {
+  console.log("clicked");
+  if(s_sclid.value =="" && s_lastname.value =="" && s_firstname.value =="" && s_middlename.value =="" && s_school.value =="" && s_location.value ==""){
+   console.log('empty fields')
+   errorMsg.value=true
+  }else{
+    console.log("clicked after if");
+    errorMsg.value=false
     await addNewStudentFile(
       s_sclid.value,
       s_lastname.value,
@@ -260,9 +261,10 @@ const handleAddStudent = async () => {
       s_birthcert.value,
       s_appform.value
     );
-    router.push("/landing");
+    router.push("/tableview");
     console.log(s_school.value);
   }
+  
 };
 onMounted(async () => {
   schools.value = await getAllSchools();
