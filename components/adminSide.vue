@@ -17,7 +17,7 @@
         <ul class="space-y-4 text-sm">
           <li>
             <nuxt-link
-              to=""
+              to="/landingAd"
               class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-200 focus:shadow-outline"
             >
              <font-awesome-icon icon="fa-solid fa-home" />
@@ -26,12 +26,30 @@
             </nuxt-link>
           </li>
           <li>
-            <nuxt-link to=""
+            <nuxt-link to="/addfile"
               
               class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
             >
               <font-awesome-icon icon="fa-solid fa-plus" />
               <span>Add File</span>
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/recent"
+              
+              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
+            >
+              <font-awesome-icon icon="fa-solid fa-calendar" />
+              <span>Recent Activity</span>
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/recent"
+              
+              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
+            >
+              <font-awesome-icon icon="fa-solid fa-users" />
+              <span>Users</span>
             </nuxt-link>
           </li>
          

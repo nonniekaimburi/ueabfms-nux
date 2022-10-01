@@ -1,15 +1,14 @@
 import {
   addDoc,
   collection,
-  deleteDoc,
   doc,
   getDoc,
   getDocs,
   getFirestore,
+  limit,
+  orderBy,
   query,
-  setDoc,
-  Timestamp,
-  where
+  Timestamp, where
 } from "firebase/firestore";
 export const getAllSchools = async () => {
   const db = getFirestore();
@@ -177,3 +176,19 @@ export const newReturn = async (id, file, location, sclid, user, action) => {
   });
   
 }
+export const getRecentHistory=async() =>{
+      const time = new Date();
+      const db = getFirestore();
+      const histo = [];
+      const q = query(
+        collection(db, "history"),
+        where("time", "<=", time),
+        orderBy("time", "desc"),
+        limit(8)
+      );
+      const querySnap = await getDocs(q);
+      querySnap.forEach((doc) => {
+        histo.push({ ...doc.data(), id: doc.id });
+      });
+      return histo;
+    }
