@@ -178,9 +178,7 @@
 </template>
 
 <script setup>
-    definePageMeta({
-  layout: "admin",
-});
+//     
 const router = useRouter();
 const students = ref([]);
 const search = ref("");
