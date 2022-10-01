@@ -44,7 +44,7 @@
             </nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/recent"
+            <nuxt-link to="/users"
               
               class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
             >

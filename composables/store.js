@@ -8,7 +8,9 @@ import {
   limit,
   orderBy,
   query,
-  Timestamp, where
+  Timestamp,
+  updateDoc,
+  where
 } from "firebase/firestore";
 export const getAllSchools = async () => {
   const db = getFirestore();
@@ -191,4 +193,22 @@ export const getRecentHistory=async() =>{
         histo.push({ ...doc.data(), id: doc.id });
       });
       return histo;
+    }
+
+    export const getAllUsers=async() =>{
+      const db = getFirestore();
+      const users = [];
+      const userSnap = await getDocs(collection(db, "users"));
+      userSnap.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id });
+        console.log(doc.id, " => ", doc.data());
+      });
+      return users;
+    }
+    export const updaUseDoc=async(id, admin) =>{
+      const db = getFirestore();
+      const userRef = doc(db, "users", id);
+      await updateDoc(userRef, {
+        admin: admin,
+      });
     }
