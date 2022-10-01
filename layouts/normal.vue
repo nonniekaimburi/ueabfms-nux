@@ -1,7 +1,7 @@
 <template>
     <div class="flex ">
         <div>
-           <AdminSide1/>
+            <Sidebar1/>
         </div>
         <div class="pl-4 pr-4 w-full">
             <Navbar1/>
@@ -12,8 +12,8 @@
 </template>
 
 <script setup>
-import AdminSide1 from '~~/components/adminSide.vue';
 import Navbar1 from '~~/components/navbar.vue';
+import Sidebar1 from '~~/components/sidebar.vue';
 
 </script>
 

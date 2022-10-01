@@ -95,7 +95,7 @@
 
 <script setup>
 definePageMeta({
-  layout: "admin",
+  layout: "normal",
 });
 
 const students = ref([]);
