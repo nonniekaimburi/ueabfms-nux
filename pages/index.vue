@@ -36,7 +36,7 @@ const firebaseUser=useFirebaseUser()
     if (docSnap.exists()) {
       userRedirect.value = docSnap.data();
       if (userRedirect.value.admin) {
-        router.push("/landing");
+        router.push("/landingAd");
       } else {
         console.log("logged in");
         // isLoggedIn.value = true;
