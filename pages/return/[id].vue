@@ -4,6 +4,12 @@
         <p class="text-xl text-center font-bold">
           Return <span class="text-primary">File for {{ student.sclid }}</span>
         </p>
+        <p class="text-red-600 text-lg font-normal" v-if="overalErro">
+          No document has been picked from this file yet
+         </p>
+         <p class="text-red-600 text-lg font-normal" v-if="erroMesage">
+          Please select a document to Return
+        </p>
       </div>
       <div class="flex justify-between">
         <div class="border rounded p-8 flex flex-col gap-2">
@@ -179,15 +185,20 @@
     </TransitionRoot>
   </template>
   <script setup>
-  import { onMounted, ref } from "vue";
+ 
   
-  import {
+  import { getAuth } from "@firebase/auth";
+import {
 Dialog,
 DialogPanel,
 DialogTitle,
 TransitionChild,
 TransitionRoot
 } from "@headlessui/vue";
+import {
+deleteDoc, doc,
+getDoc, getFirestore
+} from "firebase/firestore";
 
 definePageMeta({
   layout: "admin",
@@ -207,24 +218,48 @@ definePageMeta({
   };
   const name = ref("");
   const files = ref([]);
-  const user = ref(null);
+  
   const histo = ref(null);
+  const erroMesage=ref(false)
+  const overalErro=ref(false)
   onMounted(async () => {
     student.value = await getSingleStudent(route.params.id);
     
     histo.value = await getSingleHistory(route.params.id);
   });
   const handleReturn = async () => {
-    await newHistory(
-        route.params.id,
-        files.value,
-        name.value,
-        student.value.sclid,
-        user.value.email,
-        "return"
-      );
+    console.log('before if')
+    if (files.value.length == 0) {
+    erroMesage.value = true;
+    isOpen.value = false;
+    console.log('afte if')
+  } else {
+    erroMesage.value = false;
+    console.log('inside else')
+    const db = getFirestore();
+    const route = useRoute();
+    const docRef = doc(db, "history", route.params.id);
+    const docSnap = await getDoc(docRef);
+    if(docSnap.exists()){
+      console.log('insid nested if if')
+     
+      await newReturn(
+      route.params.id,
+      files.value,
+      name.value,
+      student.value.sclid,
+      getAuth().currentUser.email,
+      "return"
+    );
+    await deleteDoc(doc(db, "history", route.params.id));
+    isOpen.value = false;
+    router.push("/tableview");
+    }else{
+      overalErro.value=true
       isOpen.value = false;
-      router.push("/tableview");
+    }
+   
+  }
   };
   </script>
   

@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -147,3 +148,32 @@ export const getSingleHistory = async (id) => {
   }
   return history;
 };
+
+export const getHistoryForAStudent=async(id) =>{
+  const db = getFirestore();
+  const students = [];
+  const q = query(collection(db, "history"), where("id", "==", id));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    students.push({ ...doc.data(), id: doc.id });
+    console.log(doc.id, " => ", doc.data());
+  });
+  return students;
+}
+export const deleteHistory=async(id)=>{
+  const db=getFirestore()
+  await deleteDoc(doc(db, "history", id));
+}
+export const newReturn = async (id, file, location, sclid, user, action) => {
+  const db=getFirestore()
+  await setDoc(doc(db, "returns", id), {
+    id: id,
+    time: Timestamp.now(),
+    user: user,
+    location: location,
+    file: file,
+    sclid: sclid,
+    action: action,
+  });
+  
+}

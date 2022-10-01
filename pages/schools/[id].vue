@@ -94,24 +94,24 @@
                   <td
                     class="px-2 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
-                    <router-link :to="{}">
+                    <router-link :to="{name:'retrieve-id',params:{id:student.id}}">
                       <font-awesome-icon
                         icon="fa-solid fa-print"
                         class="text-green-500 px-4 cursor-pointer py-2"
                       />
                     </router-link>
-                    <router-link :to="{}">
+                    <router-link :to="{name:'return-id',params:{id:student.id}}">
                       <font-awesome-icon
                         icon="fa-solid fa-undo"
                         class="text-blue-500 px-4 cursor-pointer py-2"
                       />
                     </router-link>
-                    <button>
+                    <router-link :to="{name:'history-id',params:{id:student.id}}">
                       <font-awesome-icon
                         icon="fa-solid fa-archive"
                         class="text-orange-500 px-4 cursor-pointer py-2"
                       />
-                    </button>
+                    </router-link>
                   </td>
                 </tr>
               </tbody>
