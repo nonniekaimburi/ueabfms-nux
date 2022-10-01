@@ -21,10 +21,10 @@
       </div>
     </div>
     <div class="flex flex-col w-full overflow-hidden">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-4">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div class="overflow-hidden">
-            <table class="min-w-full">
+            <table class="w-full">
               <thead class="border-2">
                 <tr>
                   <th
@@ -158,7 +158,7 @@
                         type="button"
                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                       >
-                        History
+                        Hist
                       </button>
                     </router-link>
                   </td>
@@ -178,6 +178,9 @@
 </template>
 
 <script setup>
+    definePageMeta({
+  layout: "admin",
+});
 const router = useRouter();
 const students = ref([]);
 const search = ref("");

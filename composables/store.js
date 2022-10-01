@@ -4,8 +4,11 @@ import {
   doc,
   getDoc,
   getDocs,
-  getFirestore, query,
-  Timestamp, where
+  getFirestore,
+  query,
+  setDoc,
+  Timestamp,
+  where
 } from "firebase/firestore";
 export const getAllSchools = async () => {
   const db = getFirestore();
@@ -48,13 +51,13 @@ export const getStudentsToSpecificSchool = async (id) => {
   }
   return students;
 };
-export const addNewStudentFile=async(
+export const addNewStudentFile = async (
   sclid,
   Lastname,
   Firstname,
   Middlename,
   school,
-  
+
   Location,
   addition,
   addition1,
@@ -64,7 +67,7 @@ export const addNewStudentFile=async(
   kcse,
   birthcert,
   appform
-) =>{
+) => {
   const db = getFirestore();
   await addDoc(collection(db, "students"), {
     sclid: sclid,
@@ -76,19 +79,19 @@ export const addNewStudentFile=async(
     status: "present",
     Location: Location,
     createdAt: Timestamp.now(),
-    
+
     addition: addition,
     addition1: addition1,
     addition2: addition2,
-    addtion3:addtion3,
-    kcpe:kcpe,
-    kcse:kcse,
+    addtion3: addtion3,
+    kcpe: kcpe,
+    kcse: kcse,
     birthcert: birthcert,
-    appform: appform
+    appform: appform,
   });
-}
+};
 
-export const getAllStudentFiles=async()=> {
+export const getAllStudentFiles = async () => {
   const db = getFirestore();
   const studentsFiles = [];
   const fileSnap = await getDocs(collection(db, "students"));
@@ -97,8 +100,8 @@ export const getAllStudentFiles=async()=> {
     console.log(doc.id, " => ", doc.data());
   });
   return studentsFiles;
-}
-export const getSingleStudent=async(id) =>{
+};
+export const getSingleStudent = async (id) => {
   const db = getFirestore();
   var student = null;
   const ref = doc(db, "students", id);
@@ -111,10 +114,10 @@ export const getSingleStudent=async(id) =>{
     console.log("No such document!");
   }
   return student;
-}
-export const newHistory=async(id, file, location, sclid, user, action) =>{
-  const db = getFirestore();
-  await addDoc(collection(db, "history"), {
+};
+export const newHistory = async (id, file, location, sclid, user, action) => {
+  const db=getFirestore()
+  await setDoc(doc(db, "history", id), {
     id: id,
     time: Timestamp.now(),
     user: user,
@@ -123,8 +126,17 @@ export const newHistory=async(id, file, location, sclid, user, action) =>{
     sclid: sclid,
     action: action,
   });
-}
-export const getSingleHistory=async(id)=> {
+  // await addDoc(collection(db, "history"), {
+  //   id: id,
+  //   time: Timestamp.now(),
+  //   user: user,
+  //   location: location,
+  //   file: file,
+  //   sclid: sclid,
+  //   action: action,
+  // });
+};
+export const getSingleHistory = async (id) => {
   const db = getFirestore();
   var history = null;
 
@@ -134,4 +146,4 @@ export const getSingleHistory=async(id)=> {
     history = historySnap.data();
   }
   return history;
-}
+};
