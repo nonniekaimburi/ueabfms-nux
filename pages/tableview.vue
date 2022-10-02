@@ -1,12 +1,16 @@
 <template>
-  <div class="w-full text-right">
-    <router-link :to="{ path: '/addfile' }">
-      <button class="btn btn-md btn-primary mt-4">+ Add File</button>
-    </router-link>
+  <div class=" text-right">
+    
+      
+    
   </div>
   <br />
 
   <div class="">
+    <router-link :to="{ path: '/addfile' }" class="bg-blue-600 ml-10 px-2 py-2 rounded mt-10 text-right">
+      <font-awesome-icon icon="fa-solid fa-plus" class="text-white"/>
+      <span class="text-white">Add File</span>
+    </router-link>
     <div class="flex justify-between items-center p-3 w-96">
       <div class="text-orange-500 font-normal text-sm">
         {{ students.length }} students
@@ -171,9 +175,9 @@
     </div>
   </div>
   <div>
-    <router-link :to="{ path: '/landing' }">
-      <button class="btn btn-md btn-primary mt-4">Go Back</button>
-    </router-link>
+    <!-- <router-link :to="{ path: '/landing' }" class="ml-6 mb-2">
+      <button class="bg-blue-600 text-sm font-normal text-white px-2 py-2 rounded ">Go Back</button>
+    </router-link> -->
   </div>
 </template>
 

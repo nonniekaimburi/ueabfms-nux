@@ -29,7 +29,7 @@
 
 <script setup>
 definePageMeta({
-  layout: "admin",
+  layout: "normal",
 });
 const schools = ref([]);
 onMounted(async()=>{
