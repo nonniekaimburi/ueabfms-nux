@@ -8,6 +8,7 @@ import {
   limit,
   orderBy,
   query,
+  setDoc,
   Timestamp,
   updateDoc,
   where
@@ -118,7 +119,7 @@ export const getSingleStudent = async (id) => {
   return student;
 };
 export const newHistory = async (id, file, location, sclid, user, action) => {
-  const db=getFirestore()
+  const db = getFirestore();
   await setDoc(doc(db, "history", id), {
     id: id,
     time: Timestamp.now(),
@@ -150,7 +151,7 @@ export const getSingleHistory = async (id) => {
   return history;
 };
 
-export const getHistoryForAStudent=async(id) =>{
+export const getHistoryForAStudent = async (id) => {
   const db = getFirestore();
   const students = [];
   const q = query(collection(db, "history"), where("id", "==", id));
@@ -160,13 +161,13 @@ export const getHistoryForAStudent=async(id) =>{
     console.log(doc.id, " => ", doc.data());
   });
   return students;
-}
-export const deleteHistory=async(id)=>{
-  const db=getFirestore()
+};
+export const deleteHistory = async (id) => {
+  const db = getFirestore();
   await deleteDoc(doc(db, "history", id));
-}
+};
 export const newReturn = async (id, file, location, sclid, user, action) => {
-  const db=getFirestore()
+  const db = getFirestore();
   await setDoc(doc(db, "returns", id), {
     id: id,
     time: Timestamp.now(),
@@ -176,39 +177,45 @@ export const newReturn = async (id, file, location, sclid, user, action) => {
     sclid: sclid,
     action: action,
   });
-  
-}
-export const getRecentHistory=async() =>{
-      const time = new Date();
-      const db = getFirestore();
-      const histo = [];
-      const q = query(
-        collection(db, "history"),
-        where("time", "<=", time),
-        orderBy("time", "desc"),
-        limit(8)
-      );
-      const querySnap = await getDocs(q);
-      querySnap.forEach((doc) => {
-        histo.push({ ...doc.data(), id: doc.id });
-      });
-      return histo;
-    }
+};
+export const getRecentHistory = async () => {
+  const time = new Date();
+  const db = getFirestore();
+  const histo = [];
+  const q = query(
+    collection(db, "history"),
+    where("time", "<=", time),
+    orderBy("time", "desc"),
+    limit(8)
+  );
+  const querySnap = await getDocs(q);
+  querySnap.forEach((doc) => {
+    histo.push({ ...doc.data(), id: doc.id });
+  });
+  return histo;
+};
 
-    export const getAllUsers=async() =>{
-      const db = getFirestore();
-      const users = [];
-      const userSnap = await getDocs(collection(db, "users"));
-      userSnap.forEach((doc) => {
-        users.push({ ...doc.data(), id: doc.id });
-        console.log(doc.id, " => ", doc.data());
-      });
-      return users;
-    }
-    export const updaUseDoc=async(id, admin) =>{
-      const db = getFirestore();
-      const userRef = doc(db, "users", id);
-      await updateDoc(userRef, {
-        admin: admin,
-      });
-    }
+export const getAllUsers = async () => {
+  const db = getFirestore();
+  const users = [];
+  const userSnap = await getDocs(collection(db, "users"));
+  userSnap.forEach((doc) => {
+    users.push({ ...doc.data(), id: doc.id });
+    console.log(doc.id, " => ", doc.data());
+  });
+  return users;
+};
+export const updaUseDoc = async (id, admin) => {
+  const db = getFirestore();
+  const userRef = doc(db, "users", id);
+  await updateDoc(userRef, {
+    admin: admin,
+  });
+};
+export const restrictUser = async (id, email) => {
+  const db = getFirestore();
+  await setDoc(doc(db, "banned", id), {
+    time: Timestamp.now(),
+    email: email,
+  });
+};
