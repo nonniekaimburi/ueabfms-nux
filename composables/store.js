@@ -1,3 +1,4 @@
+import { getAuth } from "firebase/auth";
 import {
   addDoc,
   collection,
@@ -82,7 +83,7 @@ export const addNewStudentFile = async (
     status: "present",
     Location: Location,
     createdAt: Timestamp.now(),
-
+    by:getAuth().currentUser.email,
     addition: addition,
     addition1: addition1,
     addition2: addition2,
@@ -219,3 +220,21 @@ export const restrictUser = async (id, email) => {
     email: email,
   });
 };
+
+export const getSpecificAdminHist=async(id)=>{
+  const students=[]
+  const db=getFirestore()
+  const userRef = doc(db, "users", id);
+  const userSnap = await getDoc(userRef);
+  if(userSnap.exists()){
+    const user=userSnap.data()
+    const studeRef = collection(db, "history");
+    const q = query(studeRef, where("user", "==", user.email));
+    const querySnap = await getDocs(q);
+    querySnap.forEach((doc)=>{
+      students.push({...doc.data(),id:doc.id})
+    })
+  }
+
+return students
+}

@@ -24,9 +24,9 @@
                       <button class="px-4 bg-orange-500 rounded py-2 mx-2" @click="openModal">
                        <span>Restrict</span>
                       </button>
-                      <button class="px-4 bg-green-500 rounded py-2 mx-2">
+                      <nuxt-link :to="{name:'user-id',params:{id:user.id}}" class="px-4 bg-green-500 rounded py-2 mx-2">
                         <span class="text-white font-normal">History</span>
-                      </button>
+                      </nuxt-link>
                     </td>
                     <TransitionRoot appear :show="isOpen" as="template">
                       <Dialog as="div" @close="closeModal" class="relative z-10">
