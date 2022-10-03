@@ -8,8 +8,7 @@ import {
   getFirestore,
   limit,
   orderBy,
-  query,
-  Timestamp,
+  query, setDoc, startAfter, Timestamp,
   updateDoc,
   where
 } from "firebase/firestore";
@@ -97,11 +96,22 @@ export const addNewStudentFile = async (
 export const getAllStudentFiles = async () => {
   const db = getFirestore();
   const studentsFiles = [];
-  const fileSnap = await getDocs(collection(db, "students"));
-  fileSnap.forEach((doc) => {
-    studentsFiles.push({ ...doc.data(), id: doc.id });
-    console.log(doc.id, " => ", doc.data());
-  });
+  var lastVisible=null
+  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(8));
+  const docSnap=await getDocs(firstTen)
+  docSnap.forEach((doc)=>{
+    studentsFiles.push({...doc.data(),id:doc.id})
+  })
+   lastVisible = docSnap.docs[docSnap.docs.length-1];
+  // console.log("last", lastVisible);
+  // const nextTen= query(collection(db, "students"),orderBy("createdAt"),startAfter(lastVisible),limit(8));
+
+
+  // const fileSnap = await getDocs(collection(db, "students"));
+  // fileSnap.forEach((doc) => {
+  //   studentsFiles.push({ ...doc.data(), id: doc.id });
+  //   console.log(doc.id, " => ", doc.data());
+  // });
   return studentsFiles;
 };
 export const getSingleStudent = async (id) => {

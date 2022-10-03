@@ -175,9 +175,7 @@
     </div>
   </div>
   <div>
-    <!-- <router-link :to="{ path: '/landing' }" class="ml-6 mb-2">
-      <button class="bg-blue-600 text-sm font-normal text-white px-2 py-2 rounded ">Go Back</button>
-    </router-link> -->
+    <button @click="handleNext" class="bg-blue-600 text-sm font-normal text-white px-2 py-2 rounded ">Next</button>
   </div>
 </template>
 
@@ -200,6 +198,10 @@ const searchedfiles = computed(() => {
 onMounted(async () => {
   students.value = await getAllStudentFiles();
 });
+const handleNext=async()=>{
+  students.value = await getAllStudentFiles();
+  
+}
 </script>
 
 <style scoped></style>

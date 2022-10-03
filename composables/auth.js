@@ -44,3 +44,16 @@ export const signOut=async()=>{
 
  return result
 }
+
+export const getLoggedInUser=async()=>{
+  admin.auth().listUsers(1000,nextPageToken).then((listUsersResult)=>{
+    listUsersResult.users.forEach((userRecord)=>{
+        console.log('User',userRecord.toJSON());
+    });
+    if(listUsersResult.pageToken){
+        // listAllUsers(listUsersResult.pageToken);
+    }
+}).catch((error)=>{
+    console.log('Error listing user record',error)
+})
+}

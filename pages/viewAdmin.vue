@@ -9,7 +9,7 @@
 // import { getAuth } from '@firebase/auth';
 
 onMounted(async()=>{
-//    await listAllUser()
+//  await getLoggedInUser()
 })
 </script>
 

@@ -21,7 +21,27 @@
               class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-200 focus:shadow-outline"
             >
              <font-awesome-icon icon="fa-solid fa-home" />
+              <span>Home</span>
+              
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link
+              to="/dashboard"
+              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200  focus:shadow-outline"
+            >
+             <font-awesome-icon icon="fa-solid fa-home" />
               <span>Dashboard</span>
+              
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link
+              to="/tableView"
+              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200  focus:shadow-outline"
+            >
+             <font-awesome-icon icon="fa-solid fa-home" />
+              <span>Students</span>
               
             </nuxt-link>
           </li>
