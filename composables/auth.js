@@ -16,6 +16,7 @@ export const signIn = async () => {
         admin: false,
         email: cred.user.email,
         isSuperAdmin: false,
+        isBanned:false,
         name: cred.user.displayName,
       });
     }

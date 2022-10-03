@@ -9,7 +9,6 @@ import {
   limit,
   orderBy,
   query,
-  setDoc,
   Timestamp,
   updateDoc,
   where
@@ -210,7 +209,7 @@ export const updaUseDoc = async (id, admin) => {
   const db = getFirestore();
   const userRef = doc(db, "users", id);
   await updateDoc(userRef, {
-    admin: admin,
+    isBanned: isBanned,
   });
 };
 export const restrictUser = async (id, email) => {
@@ -237,4 +236,44 @@ export const getSpecificAdminHist=async(id)=>{
   }
 
 return students
+}
+
+
+export const getAdminUsers=async()=>{
+  const admins=[]
+  const db=getFirestore()
+  const adminRef = collection(db, "users");
+  const q = query(adminRef, where("state", "==", true));
+
+}
+//  export const listAllUser=async(nextPageToken)=>{
+//   admin.auth().listUsers(1000,nextPageToken).then((listUsersResult)=>{
+//       listUsersResult.users.forEach((userRecord)=>{
+//           console.log('User',userRecord.toJSON());
+//       });
+//       if(listUsersResult.pageToken){
+//           // listAllUsers(listUsersResult.pageToken);
+//       }
+//   }).catch((error)=>{
+//       console.log('Error listing user record',error)
+//   })
+// }
+export const getAllHistory=async()=> {
+  const db = getFirestore();
+  const history = [];
+  // const histSnap = await getDocs(collection(db, "history").limit(10));
+  const histRef= collection(db,'history')
+  const q=  query(histRef,orderBy('user'), limit(10))
+  const histSnap= await getDocs(q)
+  histSnap.forEach((doc) => {
+    history.push({ ...doc.data() });
+    console.log(doc.id, " => ", doc.data());
+  });
+
+  const userSnap = await getDocs(collection(db, "users"));
+  userSnap.forEach((doc) => {
+    history.push({ ...doc.data(), id: doc.id });
+    console.log(doc.id, " => ", doc.data());
+  });
+  return history;
 }

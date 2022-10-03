@@ -72,7 +72,7 @@
                                   <button
                                     type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
-                                    @click="handleRestrict(user.id,user.email)"
+                                    @click="handleUpdateAdmin(user.id)"
                                   >
                                     Permanently
                                   </button>
@@ -119,14 +119,14 @@ const closeModal = () => {
 const openModal = () => {
   isOpen.value = true;
 };
-// const handleUpdateAdmin=async(id)=>{
-//   await updaUseDoc(id,true)
-//   isOpen.value = false;
-// }
-const handleRestrict=async(id,email)=>{
-    await restrictUser(id,email)
-    isOpen.value = false;
+const handleUpdateAdmin=async(id)=>{
+  await updaUseDoc(id,true)
+  isOpen.value = false;
 }
+// const handleRestrict=async(id,email)=>{
+//     await restrictUser(id,email)
+//     isOpen.value = false;
+// }
 const users=ref([])
 onMounted(async()=>{
   users.value=await getAllUsers()

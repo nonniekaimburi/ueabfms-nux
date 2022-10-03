@@ -3,6 +3,7 @@
     <div class="flex items-center justify-center ml-auto mr-auto flex-col">
       <h3 class="mt-52 text-3xl font-normal text-black">Welcome to UEAB</h3>
       <h3 class="text-black text-2xl"> File System.</h3>
+      <h3 class="text-red-600 text-2xl font-normal" v-if="isBanned"> You have been restricted access, visit registrar for details</h3>
       <button
       v-if="!firebaseUser"
       @click="handleLogin"
@@ -21,6 +22,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const router=useRouter()
 const firebaseUser=useFirebaseUser()
+const isBanned=ref(false)
 
   const db=ref(null)
   onMounted(async()=>{
@@ -37,7 +39,9 @@ const firebaseUser=useFirebaseUser()
       userRedirect.value = docSnap.data();
       if (userRedirect.value.admin) {
         router.push("/landingAd");
-      } else {
+      } else if(userRedirect.value.isBanned){
+        isBanned.value=true
+      }else {
         console.log("logged in");
         // isLoggedIn.value = true;
         router.push("/landing");

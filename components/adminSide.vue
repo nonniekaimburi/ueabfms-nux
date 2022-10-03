@@ -52,6 +52,15 @@
               <span>Users</span>
             </nuxt-link>
           </li>
+          <li>
+            <nuxt-link to="/viewAdmin"
+              
+              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
+            >
+              <font-awesome-icon icon="fa-solid fa-users" />
+              <span>Admins</span>
+            </nuxt-link>
+          </li>
          
           <li>
             <button
