@@ -18,6 +18,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
     "@headlessui/vue": "^1.7.3",
+    "alga-css": "^1.0.0-ruby-7",
+    "alga-js": "^0.1.0-stone-9",
     "firebase": "^9.10.0",
     "firebase-admin": "^11.0.1",
     "firebase-functions": "^3.24.1"

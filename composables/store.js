@@ -97,7 +97,7 @@ export const getAllStudentFiles = async () => {
   const db = getFirestore();
   const studentsFiles = [];
   var lastVisible=null
-  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(8));
+  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(numb));
   const docSnap=await getDocs(firstTen)
   docSnap.forEach((doc)=>{
     studentsFiles.push({...doc.data(),id:doc.id})
@@ -287,3 +287,24 @@ export const getAllHistory=async()=> {
   });
   return history;
 }
+export const getPaginatedStudentFiles = async (numb) => {
+  const db = getFirestore();
+  const studentsFiles = [];
+  var lastVisible=null
+  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(numb));
+  const docSnap=await getDocs(firstTen)
+  docSnap.forEach((doc)=>{
+    studentsFiles.push({...doc.data(),id:doc.id})
+  })
+   lastVisible = docSnap.docs[docSnap.docs.length-1];
+  // console.log("last", lastVisible);
+  // const nextTen= query(collection(db, "students"),orderBy("createdAt"),startAfter(lastVisible),limit(8));
+
+
+  // const fileSnap = await getDocs(collection(db, "students"));
+  // fileSnap.forEach((doc) => {
+  //   studentsFiles.push({ ...doc.data(), id: doc.id });
+  //   console.log(doc.id, " => ", doc.data());
+  // });
+  return studentsFiles;
+};
