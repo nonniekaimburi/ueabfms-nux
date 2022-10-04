@@ -1,20 +1,24 @@
 <template>
-  <div class=" text-right">
-    
-      
-    
-  </div>
-  <br />
+ 
 
-  <div class="">
-    <router-link :to="{ path: '/addfile' }" class="bg-blue-600 ml-10 px-2 py-2 rounded mt-10 text-right">
+  <div class="pt-4">
+
+    <router-link :to="{ path: '/addfile' }" class="bg-blue-600 ml-10 px-2 py-2 rounded mt-10">
       <font-awesome-icon icon="fa-solid fa-plus" class="text-white"/>
       <span class="text-white">Add File</span>
     </router-link>
+    <!-- <table1 :columns="columns" :entries="students" /> -->
+  <div class="flex justify-between">
+    <div class="mt-4 mx-4 flex items-center">
+      <p class="text-sm text-black font-normal px-2">Show</p>
+      <select v-model="currentPage" @change="handleNext" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-20 p-2.5 ">
+        <option v-for="entry in showEnties" :key="entry" :value="entry" >{{entry}}</option>
+        
+      </select>
+      <p class="text-sm text-black font-normal px-2">Entries</p>
+    </div>
     <div class="flex justify-between items-center p-3 w-96">
-      <div class="text-orange-500 font-normal text-sm">
-        {{ students.length }} students
-      </div>
+      
       <div>
         <input
           v-model="search"
@@ -24,6 +28,7 @@
         />
       </div>
     </div>
+  </div>
     <div class="flex flex-col w-full overflow-hidden">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-4">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -174,18 +179,19 @@
       </div>
     </div>
   </div>
-  <div>
-    <!-- <router-link :to="{ path: '/landing' }" class="ml-6 mb-2">
-      <button class="bg-blue-600 text-sm font-normal text-white px-2 py-2 rounded ">Go Back</button>
-    </router-link> -->
-  </div>
+  
 </template>
 
 <script setup>
 //     
+
+
 const router = useRouter();
 const students = ref([]);
 const search = ref("");
+const showEnties=ref([5,10,15,20])
+const currentPage=ref(5)
+
 const handleStudentDetails = (id) => {
   students.value.forEach((student) => {
     if (student.id == id) {
@@ -197,9 +203,19 @@ const handleStudentDetails = (id) => {
 const searchedfiles = computed(() => {
   return students.value.filter((student) => student.sclid.match(search.value));
 });
+const users=ref([])
 onMounted(async () => {
-  students.value = await getAllStudentFiles();
+  students.value = await getPaginatedStudentFiles(currentPage.value);
+  users.value=  listAllUsers()
+  console.log(users.value)
 });
+const handleNext=async()=>{
+  console.log('going to next');
+  students.value = await getPaginatedStudentFiles(currentPage.value);
+ 
+
+}
+
 </script>
 
 <style scoped></style>

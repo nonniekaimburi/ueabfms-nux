@@ -16,6 +16,7 @@ export const signIn = async () => {
         admin: false,
         email: cred.user.email,
         isSuperAdmin: false,
+        isBanned:false,
         name: cred.user.displayName,
       });
     }
@@ -43,3 +44,26 @@ export const signOut=async()=>{
 
  return result
 }
+
+export const  listAllUsers = (nextPageToken) => {
+  // List batch of users, 1000 at a time.
+  const users=[]
+  getAuth()
+    .listUsers(1000, nextPageToken)
+    .then((listUsersResult) => {
+      listUsersResult.users.forEach((userRecord) => {
+        console.log('user', userRecord.toJSON());
+        users.push({...userRecord.toJSON()})
+      });
+      if (listUsersResult.pageToken) {
+        // List next batch of users.
+        listAllUsers(listUsersResult.pageToken);
+      }
+    })
+    .catch((error) => {
+      console.log('Error listing users:', error);
+    });
+    return users
+};
+// Start listing users from the beginning, 1000 at a time.
+
