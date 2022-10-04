@@ -97,7 +97,7 @@ export const getAllStudentFiles = async () => {
   const db = getFirestore();
   const studentsFiles = [];
   var lastVisible=null
-  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(numb));
+  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(8));
   const docSnap=await getDocs(firstTen)
   docSnap.forEach((doc)=>{
     studentsFiles.push({...doc.data(),id:doc.id})

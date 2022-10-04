@@ -45,15 +45,25 @@ export const signOut=async()=>{
  return result
 }
 
-export const getLoggedInUser=async()=>{
-  admin.auth().listUsers(1000,nextPageToken).then((listUsersResult)=>{
-    listUsersResult.users.forEach((userRecord)=>{
-        console.log('User',userRecord.toJSON());
+export const  listAllUsers = (nextPageToken) => {
+  // List batch of users, 1000 at a time.
+  const users=[]
+  getAuth()
+    .listUsers(1000, nextPageToken)
+    .then((listUsersResult) => {
+      listUsersResult.users.forEach((userRecord) => {
+        console.log('user', userRecord.toJSON());
+        users.push({...userRecord.toJSON()})
+      });
+      if (listUsersResult.pageToken) {
+        // List next batch of users.
+        listAllUsers(listUsersResult.pageToken);
+      }
+    })
+    .catch((error) => {
+      console.log('Error listing users:', error);
     });
-    if(listUsersResult.pageToken){
-        // listAllUsers(listUsersResult.pageToken);
-    }
-}).catch((error)=>{
-    console.log('Error listing user record',error)
-})
-}
+    return users
+};
+// Start listing users from the beginning, 1000 at a time.
+

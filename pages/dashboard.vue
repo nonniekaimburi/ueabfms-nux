@@ -28,7 +28,7 @@
             <p class="font-normal text-orange-600 text-3xl">{{returnedHistory.length}}</p>
           </div>
         </div>
-        <router-link :to="{name:'table'}" class="">
+        <nuxt-link to="/tableview" class="">
           <div
             class="flex flex-col items-center p-6 w-80 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5
@@ -38,10 +38,10 @@
             </h5>
             <p class="font-normal text-orange-600 text-3xl">{{students.length}}</p>
           </div>
-        </router-link>
+        </nuxt-link>
       </div>
       <div class="flex justify-between items-center pt-4 px-4">
-        <router-link :to="{name: 'recentActivity'}" class="w-80">
+        <router-link to="/recent" class="w-80">
           <div
             class="flex items-center flex-col p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
           >
@@ -53,7 +53,7 @@
             <p class="font-normal text-orange-600 text-3xl">8</p>
           </div>
         </router-link>
-        <router-link :to="{name:'landing'}" class="flex items-center p-6 w-80 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <router-link to="/landingAd" class="flex items-center p-6 w-80 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
           <font-awesome-icon icon="fa-solid fa-graduation-cap" class="text-3xl text-orange-400 px-4" />
           <div
             class="flex flex-col items-center "
@@ -66,7 +66,7 @@
             <p class="font-normal text-orange-600 text-3xl">{{schools.length}}</p>
           </div>
         </router-link>
-        <router-link :to="{name:'users'}" class="flex items-center p-6 w-80 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <router-link to="'/users'" class="flex items-center p-6 w-80 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
           <font-awesome-icon icon="fa-solid fa-users" class="text-3xl text-orange-400 px-4" />
           <div
             class="flex flex-col items-center "
@@ -85,7 +85,9 @@
   
   <script setup>
   
-  
+  definePageMeta({
+    layout: "admin",
+  });
   const students=ref([])
   const history=ref([])
   const user=ref([])

@@ -184,13 +184,7 @@
 
 <script setup>
 //     
-const columns=ref([
-  {name:'Student id',text:'Student id'},
-  {name:'First name',text:'First name'},
-  {name:'Last name',text:'Last name'},
-  {name:'Middle name',text:'Middle name'},
-  {name:'School',text:'School'}
-])
+
 
 const router = useRouter();
 const students = ref([]);
@@ -209,8 +203,11 @@ const handleStudentDetails = (id) => {
 const searchedfiles = computed(() => {
   return students.value.filter((student) => student.sclid.match(search.value));
 });
+const users=ref([])
 onMounted(async () => {
   students.value = await getPaginatedStudentFiles(currentPage.value);
+  users.value=  listAllUsers()
+  console.log(users.value)
 });
 const handleNext=async()=>{
   console.log('going to next');
