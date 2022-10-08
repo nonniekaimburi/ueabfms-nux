@@ -263,7 +263,7 @@
         s_birthcert.value,
         s_appform.value
       );
-      router.push("/tableview");
+      router.push("/students");
       console.log(s_school.value);
     }
     
