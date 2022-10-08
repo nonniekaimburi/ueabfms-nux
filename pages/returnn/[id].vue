@@ -201,7 +201,7 @@ getDoc, getFirestore
 } from "firebase/firestore";
 
 definePageMeta({
-  layout: "admin",
+  layout: "normal",
   middleware: ["auth"]
 });
 

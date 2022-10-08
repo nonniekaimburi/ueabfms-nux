@@ -1,16 +1,20 @@
 <template>
-    <div v-if="student">
+    <div
+      style="background-image: `url('../components/images/image1.jpg') `"
+      v-if="student"
+    >
       <div>
         <p class="text-xl text-center font-bold">
-          Return <span class="text-primary">File for {{ student.sclid }}</span>
+          Retrieve <span class="text-primary">File for {{ student.sclid }}</span>
         </p>
-        <p class="text-red-600 text-lg font-normal" v-if="overalErro">
-          No document has been picked from this file yet
-         </p>
-         <p class="text-red-600 text-lg font-normal" v-if="erroMesage">
-          Please select a document to Return
+        <p class="text-red-600 text-lg font-normal" v-if="erroMesage">
+          Please select a document to retrieve
+        </p>
+        <p class="text-red-600 text-lg font-normal" v-if="isExisting">
+         This file has some documents picked from it
         </p>
       </div>
+  
       <div class="flex justify-between">
         <div class="border rounded p-8 flex flex-col gap-2">
           <b><p class="text-center">Student Details</p></b>
@@ -53,7 +57,7 @@
           </div>
         </div>
         <div class="border rounded p-8">
-          <p class="text-center font-bold">Which files do you want to Return?</p>
+          <p class="text-center font-bold">Which files do you want to Retrieve</p>
           <div class="form-control flex flex-row items-center gap-2">
             <label class="cursor-pointer label">
               <span class="label-text">KCPE Certificate</span>
@@ -94,6 +98,7 @@
             <input
               type="checkbox"
               class="checkbox checkbox-primary"
+              value="Application form"
               v-model="files"
             />
           </div>
@@ -101,14 +106,23 @@
             <label class="cursor-pointer label">
               <span class="label-text">All the Files</span>
             </label>
-            <input type="checkbox" class="checkbox checkbox-primary" />
+            <input
+              type="checkbox"
+              class="checkbox checkbox-primary"
+              value="all"
+              v-model="files"
+            />
           </div>
         </div>
       </div>
     </div>
-    <br /><button @click="openModal" class="bg-blue-600 text-white rounded px-2 py-2 text-sm font-normal">
-      Return this File
+    <br /><button
+      @click="openModal"
+      class="bg-blue-600 px-4 py-2 text-sm font-normal mx-4 rounded"
+    >
+      Retrieve this File
     </button>
+  
     <TransitionRoot appear :show="isOpen" as="template">
       <Dialog as="div" @close="closeModal" class="relative z-10">
         <TransitionChild
@@ -142,7 +156,7 @@
                   as="h3"
                   class="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Where do you want to Keep the file
+                  Where do you want to take the file
                 </DialogTitle>
                 <div class="mt-2">
                   <div class="block p-6 bg-white max-w-sm ml-auto mr-auto">
@@ -150,7 +164,7 @@
                       <label
                         for="exampleInputEmail1"
                         class="form-label inline-block mb-2 text-gray-700"
-                        >Location Name:</label
+                        >Office Name:</label
                       >
                       <input
                         v-model="name"
@@ -159,17 +173,18 @@
                         placeholder="e.g Finance office"
                       />
                     </div>
+  
                     <div class="mt-4 flex justify-between">
                       <button
                         type="button"
-                        class="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
-                        @click="handleReturn"
+                        class="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                        @click="handleUpdateAction"
                       >
                         OK
                       </button>
                       <button
                         type="button"
-                        class="inline-flex justify-center rounded-md border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium text-white hover:bg-orange-700"
+                        class="inline-flex justify-center rounded-md border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
                         @click="closeModal"
                       >
                         Cancel
@@ -185,8 +200,6 @@
     </TransitionRoot>
   </template>
   <script setup>
- 
-  
   import { getAuth } from "@firebase/auth";
 import {
 Dialog,
@@ -196,20 +209,18 @@ TransitionChild,
 TransitionRoot
 } from "@headlessui/vue";
 import {
-deleteDoc, doc,
+doc,
 getDoc, getFirestore
 } from "firebase/firestore";
-
-definePageMeta({
-  layout: "admin",
-  middleware: ["auth"]
-});
-
+  definePageMeta({
+    layout: "normal",
+    middleware: ["auth"]
+  });
+  
+  const student = ref(null);
   const route = useRoute();
   const router = useRouter();
-
- 
-  const student = ref(null);
+  
   const isOpen = ref(false);
   const closeModal = () => {
     isOpen.value = false;
@@ -219,48 +230,43 @@ definePageMeta({
   };
   const name = ref("");
   const files = ref([]);
+  const erroMesage = ref(false);
+  const isExisting=ref(false)
   
   const histo = ref(null);
-  const erroMesage=ref(false)
-  const overalErro=ref(false)
   onMounted(async () => {
     student.value = await getSingleStudent(route.params.id);
-    
+  
     histo.value = await getSingleHistory(route.params.id);
+    console.log(histo.value);
   });
-  const handleReturn = async () => {
-    console.log('before if')
+  const handleUpdateAction = async () => {
     if (files.value.length == 0) {
-    erroMesage.value = true;
-    isOpen.value = false;
-    console.log('afte if')
-  } else {
-    erroMesage.value = false;
-    console.log('inside else')
-    const db = getFirestore();
-    const route = useRoute();
-    const docRef = doc(db, "history", route.params.id);
-    const docSnap = await getDoc(docRef);
-    if(docSnap.exists()){
-      console.log('insid nested if if')
-     
-      await newReturn(
-      route.params.id,
-      files.value,
-      name.value,
-      student.value.sclid,
-      getAuth().currentUser.email,
-      "return"
-    );
-    await deleteDoc(doc(db, "history", route.params.id));
-    isOpen.value = false;
-    router.push("/tableview");
-    }else{
-      overalErro.value=true
+      erroMesage.value = true;
       isOpen.value = false;
+    } else {
+      const db = getFirestore();
+      const route = useRoute();
+      const docRef = doc(db, "history", route.params.id);
+      const docSnap = await getDoc(docRef);
+      if(docSnap.exists()){
+          console.log('the doc exists')
+          isExisting.value=true
+          isOpen.value = false;
+      }else{
+          await newHistory(
+        route.params.id,
+        files.value,
+        name.value,
+        student.value.sclid,
+        getAuth().currentUser.email,
+        "retrieve"
+      );
+      isOpen.value = false;
+      router.push("/tableview");
+      }
+     
     }
-   
-  }
   };
   </script>
   

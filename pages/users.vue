@@ -111,6 +111,7 @@ TransitionRoot
 } from "@headlessui/vue";
 definePageMeta({
     layout: "admin",
+    middleware: ["auth"]
   });
 const isOpen = ref(false);
 const closeModal = () => {

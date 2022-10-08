@@ -29,10 +29,10 @@
       </div>
     </div>
   </div>
-    <div class="flex flex-col w-full overflow-hidden">
+    <div class="flex flex-col w-full ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-4">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="overflow-hidden">
+          <div class="">
             <table class="w-full">
               <thead class="border-2">
                 <tr>
@@ -137,39 +137,76 @@
                   <td
                     class="px-2 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
-                    <router-link
-                      @click.stop
-                      :to="{ name: 'retrieve-id', params: { id: student.id } }"
-                    >
-                      <button
-                        type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      >
-                        Retrieve
-                      </button>
-                    </router-link>
-                    <router-link
-                      @click.stop
-                      :to="{ name: 'return-id', params: { id: student.id } }"
-                    >
-                      <button
-                        type="button"
-                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-                      >
-                        Return
-                      </button>
-                    </router-link>
-                    <router-link
-                      @click.stop
-                      :to="{ name: 'history-id', params: { id: student.id } }"
-                    >
-                      <button
-                        type="button"
-                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                      >
-                        Hist
-                      </button>
-                    </router-link>
+                  <div class="px-2 text-sm font-normal py-2 w-20">
+    
+                    <div class="w-full text-right">
+                   <Menu as="div" class="relative inline-block text-left">
+                     <div>
+                       <MenuButton
+                         class="inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-sm font-medium text-black   "
+                       >
+                        <font-awesome-icon :icon="['fas','ellipsis-h']" class="cursor-pointer"/>
+                         
+                       </MenuButton>
+                     </div>
+               
+                     <transition
+                       enter-active-class="transition duration-100 ease-out"
+                       enter-from-class="transform scale-95 opacity-0"
+                       enter-to-class="transform scale-100 opacity-100"
+                       leave-active-class="transition duration-75 ease-in"
+                       leave-from-class="transform scale-100 opacity-100"
+                       leave-to-class="transform scale-95 opacity-0"
+                     >
+                       <MenuItems
+                         class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                       >
+                         <div class="px-1 py-1">
+                           <MenuItem v-slot="{ active }">
+                             <router-link :to="{ name: 'retrieve-id', params: { id: student.id } }"
+                               :class="[
+                                 active ? 'bg-violet-500 text-black' : 'text-gray-900',
+                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                               ]"
+                             >
+                               
+                               Retrieve
+                             </router-link>
+                           </MenuItem>
+                           <MenuItem v-slot="{ active }">
+                             <router-link :to="{ name: 'return-id', params: { id: student.id } }"
+                               :class="[
+                                 active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                               ]"
+                             >
+                                
+                               Return
+                             </router-link>
+                           </MenuItem>
+                         </div>
+                         <div class="px-1 py-1">
+                           <MenuItem v-slot="{ active }">
+                             <router-link :to="{ name: 'history-id', params: { id: student.id } }"
+                               :class="[
+                                 active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                               ]"
+                             >
+                                
+                               History
+                             </router-link>
+                           </MenuItem>
+                          
+                         </div>
+               
+               
+                       </MenuItems>
+                     </transition>
+                   </Menu>
+                 </div>
+                   </div>
+                    
                   </td>
                 </tr>
               </tbody>
@@ -183,9 +220,12 @@
 </template>
 
 <script setup>
-//     
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 
-
+definePageMeta({
+    layout: "admin",
+    middleware: ["auth"]
+  });
 const router = useRouter();
 const students = ref([]);
 const search = ref("");

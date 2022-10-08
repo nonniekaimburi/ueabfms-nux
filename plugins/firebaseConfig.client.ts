@@ -1,5 +1,6 @@
 
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { initUser } from "~~/composables/auth";
 
 export default defineNuxtPlugin(nuxtApp => {
@@ -30,4 +31,7 @@ const app = initializeApp(firebaseConfig);
 console.log(app)
 
 initUser()
+const auth=getAuth()
+nuxtApp.vueApp.provide('auth',auth)
+nuxtApp.provide('auth',auth)
   })
