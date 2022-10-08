@@ -204,7 +204,7 @@
                                 <MenuItem v-slot="{ active }">
                                   <router-link
                                     :to="{
-                                      name: 'history-id',
+                                      name: 'historyn-id',
                                       params: { id: student.id },
                                     }"
                                     :class="[
