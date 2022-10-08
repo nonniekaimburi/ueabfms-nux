@@ -239,6 +239,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
 definePageMeta({
   layout: "normal",
+  middleware: ["auth"]
 });
 const router = useRouter();
 const students = ref([]);

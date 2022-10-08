@@ -86,6 +86,7 @@
   <script setup>
   definePageMeta({
     layout: "admin",
+    middleware: ["auth"]
   });
   const histos = ref([]);
   const time=new Date()

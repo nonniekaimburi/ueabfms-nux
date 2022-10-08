@@ -30,6 +30,7 @@
 <script setup>
 definePageMeta({
   layout: "normal",
+  middleware: ["auth"]
 });
 const schools = ref([]);
 onMounted(async()=>{

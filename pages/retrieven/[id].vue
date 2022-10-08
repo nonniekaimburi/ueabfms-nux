@@ -214,6 +214,7 @@ getDoc, getFirestore
 } from "firebase/firestore";
   definePageMeta({
     layout: "normal",
+    middleware: ["auth"]
   });
   
   const student = ref(null);

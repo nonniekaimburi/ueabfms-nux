@@ -216,6 +216,7 @@
 
 definePageMeta({
   layout: "admin",
+  middleware: ["auth"]
 });
 
 const router = useRouter();

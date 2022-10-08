@@ -202,6 +202,7 @@ getDoc, getFirestore
 
 definePageMeta({
   layout: "admin",
+  middleware: ["auth"]
 });
 
   const route = useRoute();

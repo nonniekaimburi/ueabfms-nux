@@ -126,6 +126,7 @@
 <script setup>
 definePageMeta({
   layout: "admin",
+  middleware: ["auth"]
 });
 const route = useRoute();
 const school = ref(null);
