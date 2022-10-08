@@ -26,7 +26,17 @@
             </nuxt-link>
           </li>
           <li>
-            <nuxt-link to=""
+            <nuxt-link
+              to="/students"
+              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200  focus:shadow-outline"
+            >
+             <font-awesome-icon icon="fa-solid fa-graduation-cap" />
+              <span>Students</span>
+              
+            </nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/addfile"
               
               class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:bg-gray-200 focus:shadow-outline"
             >
