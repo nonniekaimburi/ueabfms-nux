@@ -17,7 +17,7 @@
         <ul class="space-y-4 text-sm">
           <li>
             <nuxt-link
-              to=""
+              to="/landing"
               class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-200 focus:shadow-outline"
             >
              <font-awesome-icon icon="fa-solid fa-home" />
