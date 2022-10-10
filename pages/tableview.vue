@@ -99,8 +99,15 @@
                   </td>
                   <td
                     class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
-                  >
-                    {{ student.sclid }}
+                    v-if="student.sclid.length > 11"
+                    >
+                    {{ student.sclid.slice(0,11) }}...
+                  </td>
+                  <td
+                    class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    v-else
+                    >
+                    {{ student.sclid.slice(0,11) }} 
                   </td>
                   <td
                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
