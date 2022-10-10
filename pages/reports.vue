@@ -15,7 +15,7 @@
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r "
+                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
                   >
                     File
                   </th>
@@ -28,26 +28,38 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-2 cursor-pointer"
-                v-for="(report,index) in reports" :key="index"
+                <tr
+                  class="border-2 cursor-pointer"
+                  v-for="(report, index) in reports"
+                  :key="index"
                 >
                   <td
                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
-                    {{index + 1}}
+                    {{ index + 1 }}
                   </td>
 
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r hover:bg-gray-400"
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r hover:bg-gray"
                   >
-                    {{report.title}}
+                    {{ report.title }}
                   </td>
                   <td
                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center items-center"
                   >
-                  <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-2">PDF</button>
-                  <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-2">Excel</button>
-
+                    <button
+                    @click="getAllStudentReports(report.id)"
+                      type="button"
+                      class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-2"
+                    >
+                      PDF
+                    </button>
+                    <button
+                      type="button"
+                      class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-2"
+                    >
+                      Excel
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -90,6 +102,22 @@ const reports=ref([
         title:"Files without application form"
     }
 ])
+const studentReport=ref([])
+const getAllStudentReports=async(index)=>{
+  if(index==3){
+    studentReport.value= await getFilesWithoutBirth()
+    console.log('birth')
+  }else if(index==4){
+    studentReport.value=await getFilesWithoutKcse()
+    console.log('kcse')
+  }else if(index==5){
+    studentReport.value=await getFilesWithoutKcpe()
+    console.log('kcpe')
+  }else{
+    console.log('not yet implemented')
+  }
+}
+
 </script>
 
 <style lang="scss" scoped></style>
