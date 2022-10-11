@@ -1,7 +1,7 @@
 <template>
   <div class="pt-4">
     <router-link
-      :to="{ path: '/addfile' }"
+      :to="{ path: '/addfilen' }"
       class="bg-blue-600 ml-10 px-2 py-2 rounded mt-10"
     >
       <font-awesome-icon icon="fa-solid fa-plus" class="text-white" />
@@ -102,10 +102,17 @@
                     {{ index + 1 }}
                   </td>
                   <td
-                    class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                  class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                  v-if="student.sclid.length > 11"
                   >
-                    {{ student.sclid }}
-                  </td>
+                  {{ student.sclid.slice(0,11) }}...
+                </td>
+                <td
+                  class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                  v-else
+                  >
+                  {{ student.sclid.slice(0,11) }} 
+                </td>
                   <td
                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >

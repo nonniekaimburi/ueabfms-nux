@@ -308,3 +308,40 @@ export const getPaginatedStudentFiles = async (numb) => {
   // });
   return studentsFiles;
 };
+export const getFilesWithoutBirth=async()=>{
+  const db=getFirestore()
+  const studentBirths=[];
+  const birthRef = collection(db, "students");
+  const q = query(birthRef, where("birthcert", "==", true));
+  const birthSnap = await getDocs(q);
+  birthSnap.forEach((doc)=>{
+    studentBirths.push({...doc.data(),id:doc.id})
+  })
+  return studentBirths;
+
+}
+
+export const getFilesWithoutKcpe=async()=>{
+  const db=getFirestore()
+  const studentKcpe=[];
+  const birthRef = collection(db, "students");
+  const q = query(birthRef, where("kcpe", "==", true));
+  const birthSnap = await getDocs(q);
+  birthSnap.forEach((doc)=>{
+    studentKcpe.push({...doc.data(),id:doc.id})
+  })
+  return studentKcpe;
+
+}
+export const getFilesWithoutKcse=async()=>{
+  const db=getFirestore()
+  const studentKcse=[];
+  const birthRef = collection(db, "students");
+  const q = query(birthRef, where("kcse", "==", true));
+  const birthSnap = await getDocs(q);
+  birthSnap.forEach((doc)=>{
+    studentKcse.push({...doc.data(),id:doc.id})
+  })
+  return studentKcse;
+
+}

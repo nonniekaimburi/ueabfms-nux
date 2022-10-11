@@ -242,6 +242,7 @@ const errorMsg=ref(false)
 const handleAddStudent = async () => {
   console.log("clicked");
   if(s_sclid.value =="" && s_lastname.value =="" && s_firstname.value =="" && s_middlename.value =="" && s_school.value =="" && s_location.value ==""){
+    
    console.log('empty fields')
    errorMsg.value=true
   }else{
