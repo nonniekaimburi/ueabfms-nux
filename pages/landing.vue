@@ -5,7 +5,7 @@
           
           
           <div class="w-full text-right">
-         <nuxt-link :to="{path:'/addfile'}" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
+         <nuxt-link :to="{path:'/addfilen'}" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
               <font-awesome-icon icon="fa-solid fa-plus" />
               <span class="text-sm">Add File</span>
             </nuxt-link>

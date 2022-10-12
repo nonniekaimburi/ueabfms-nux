@@ -1,7 +1,14 @@
 <template>
-    <div>
-        <p class="font-bold text-2xl"><span class="text-primary">Users</span> view</p>
+    <div class="flex justify-between">
+        <div>
+          <p class="font-bold text-2xl"><span class="text-primary">Users</span> view</p>
+        </div>
+        <nuxt-link :to="{path:'/newUser'}" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
+          <font-awesome-icon icon="fa-solid fa-plus" />
+          <span class="text-sm">Add File</span>
+        </nuxt-link>
     </div>
+    
 
     <div>
       <div class="flex flex-col">

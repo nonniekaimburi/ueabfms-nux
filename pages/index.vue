@@ -24,7 +24,7 @@
             Continue to Dashboard a
           </router-link>
         </div>
-        <div v-else>
+        <div v-if="notAdmin">
           <router-link
             to="/landing"
             type="button"
@@ -32,6 +32,11 @@
           >
             Continue to Dashboard n
           </router-link>
+        </div>
+        <div v-if="isNotAllowed">
+          <p class="text-red-600 text-lg font-normal">
+            The email is not allowed to access the system
+          </p>
         </div>
       </div>
     </div>
@@ -45,6 +50,8 @@ const router = useRouter();
 const firebaseUser = useFirebaseUser();
 const isBanned = ref(false);
 const isAdmin = ref(false);
+const notAdmin=ref(false)
+const isNotAllowed=ref(false)
 
 const db = ref(null);
 onMounted(async () => {
@@ -53,7 +60,8 @@ onMounted(async () => {
 });
 const handleLogin = async () => {
   const cred = await signIn();
-  const user = cred.user;
+  if(cred.user.email.endsWith('ueab.ac.ke')){
+    const user = cred.user;
   const userRedirect = ref(null);
   const docRef = doc(db.value, "users", user.uid);
   const docSnap = await getDoc(docRef);
@@ -64,13 +72,17 @@ const handleLogin = async () => {
       isAdmin.value = true;
     } else if (userRedirect.value.isBanned) {
       isBanned.value = true;
-    } else {
+    } else if(!userRedirect.value.admin) {
       console.log("logged in");
       // isLoggedIn.value = true;
-      isAdmin.value = false;
+      notAdmin.value = false;
       router.push("/landing");
     }
   }
+  }else{
+    isNotAllowed.value=true
+  }
+  
 };
 </script>
 
