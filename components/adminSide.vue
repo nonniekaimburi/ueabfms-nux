@@ -1,7 +1,7 @@
 <template>
     <div class="">
       <client-only>
-      <div class="bg-white p-3 h-screen w-60">
+      <div class="bg-white p-1 h-screen w-60">
         <div
           class="flex flex-col justify-center items-center p-2 mb-8 text-center"
         >

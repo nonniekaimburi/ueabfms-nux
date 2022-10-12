@@ -3,7 +3,7 @@
         <div>
            <AdminSide1/>
         </div>
-        <div class="pl-4 pr-4 w-full">
+        <div class="pl-0 pr-1 w-full">
             <Navbar1/>
             <slot/>
         </div>
