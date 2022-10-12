@@ -3,10 +3,10 @@
         <div>
           <p class="font-bold text-2xl"><span class="text-primary">Users</span> view</p>
         </div>
-        <nuxt-link :to="{path:'/newUser'}" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
+        <button @click="handleUsers" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
           <font-awesome-icon icon="fa-solid fa-plus" />
           <span class="text-sm">Add File</span>
-        </nuxt-link>
+      </button>
     </div>
     
 
@@ -135,6 +135,9 @@ const handleUpdateAdmin=async(id)=>{
 //     await restrictUser(id,email)
 //     isOpen.value = false;
 // }
+const handleUsers=async()=>{
+  await signIn()
+}
 const users=ref([])
 onMounted(async()=>{
   users.value=await getAllUsers()
