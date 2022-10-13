@@ -5,7 +5,7 @@
         </div>
         <button @click="handleUsers" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
           <font-awesome-icon icon="fa-solid fa-plus" />
-          <span class="text-sm">Add File</span>
+          <span class="text-sm">Add User</span>
       </button>
     </div>
     
@@ -118,7 +118,7 @@ TransitionRoot
 } from "@headlessui/vue";
 definePageMeta({
     layout: "admin",
-    middleware: ["auth"]
+    // middleware: ["auth"]
   });
 const isOpen = ref(false);
 const closeModal = () => {
@@ -136,7 +136,7 @@ const handleUpdateAdmin=async(id)=>{
 //     isOpen.value = false;
 // }
 const handleUsers=async()=>{
-  await signIn()
+  await newUser()
 }
 const users=ref([])
 onMounted(async()=>{

@@ -76,6 +76,7 @@ definePageMeta({
   layout: "admin",
   // middleware: ["auth"]
 });
+const router=useRouter()
 const reports=ref([
     {
         id:1,
@@ -107,6 +108,7 @@ const getAllStudentReports=async(index)=>{
   if(index==3){
     studentReport.value= await getFilesWithoutBirth()
     console.log('birth')
+    router.push('/pdf')
   }else if(index==4){
     studentReport.value=await getFilesWithoutKcse()
     console.log('kcse')

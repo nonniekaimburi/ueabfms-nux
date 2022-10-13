@@ -1,4 +1,4 @@
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import {
   addDoc,
   collection,
@@ -8,7 +8,10 @@ import {
   getFirestore,
   limit,
   orderBy,
-  query, setDoc, startAfter, Timestamp,
+  query,
+  setDoc,
+  startAfter,
+  Timestamp,
   updateDoc,
   where
 } from "firebase/firestore";
@@ -81,7 +84,7 @@ export const addNewStudentFile = async (
     status: "present",
     Location: Location,
     createdAt: Timestamp.now(),
-    by:getAuth().currentUser.email,
+    by: getAuth().currentUser.email,
     addition: addition,
     addition1: addition1,
     addition2: addition2,
@@ -96,16 +99,20 @@ export const addNewStudentFile = async (
 export const getAllStudentFiles = async () => {
   const db = getFirestore();
   const studentsFiles = [];
-  var lastVisible=null
-  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(8));
-  const docSnap=await getDocs(firstTen)
-  docSnap.forEach((doc)=>{
-    studentsFiles.push({...doc.data(),id:doc.id})
-  })
-   lastVisible = docSnap.docs[docSnap.docs.length-1];
+  var lastVisible = null;
+  const firstTen = query(
+    collection(db, "students"),
+    orderBy("createdAt"),
+    startAfter(lastVisible || 0),
+    limit(8)
+  );
+  const docSnap = await getDocs(firstTen);
+  docSnap.forEach((doc) => {
+    studentsFiles.push({ ...doc.data(), id: doc.id });
+  });
+  lastVisible = docSnap.docs[docSnap.docs.length - 1];
   // console.log("last", lastVisible);
   // const nextTen= query(collection(db, "students"),orderBy("createdAt"),startAfter(lastVisible),limit(8));
-
 
   // const fileSnap = await getDocs(collection(db, "students"));
   // fileSnap.forEach((doc) => {
@@ -230,32 +237,30 @@ export const restrictUser = async (id, email) => {
   });
 };
 
-export const getSpecificAdminHist=async(id)=>{
-  const students=[]
-  const db=getFirestore()
+export const getSpecificAdminHist = async (id) => {
+  const students = [];
+  const db = getFirestore();
   const userRef = doc(db, "users", id);
   const userSnap = await getDoc(userRef);
-  if(userSnap.exists()){
-    const user=userSnap.data()
+  if (userSnap.exists()) {
+    const user = userSnap.data();
     const studeRef = collection(db, "history");
     const q = query(studeRef, where("user", "==", user.email));
     const querySnap = await getDocs(q);
-    querySnap.forEach((doc)=>{
-      students.push({...doc.data(),id:doc.id})
-    })
+    querySnap.forEach((doc) => {
+      students.push({ ...doc.data(), id: doc.id });
+    });
   }
 
-return students
-}
+  return students;
+};
 
-
-export const getAdminUsers=async()=>{
-  const admins=[]
-  const db=getFirestore()
+export const getAdminUsers = async () => {
+  const admins = [];
+  const db = getFirestore();
   const adminRef = collection(db, "users");
   const q = query(adminRef, where("state", "==", true));
-
-}
+};
 //  export const listAllUser=async(nextPageToken)=>{
 //   admin.auth().listUsers(1000,nextPageToken).then((listUsersResult)=>{
 //       listUsersResult.users.forEach((userRecord)=>{
@@ -268,13 +273,13 @@ export const getAdminUsers=async()=>{
 //       console.log('Error listing user record',error)
 //   })
 // }
-export const getAllHistory=async()=> {
+export const getAllHistory = async () => {
   const db = getFirestore();
   const history = [];
   // const histSnap = await getDocs(collection(db, "history").limit(10));
-  const histRef= collection(db,'history')
-  const q=  query(histRef,orderBy('user'), limit(10))
-  const histSnap= await getDocs(q)
+  const histRef = collection(db, "history");
+  const q = query(histRef, orderBy("user"), limit(10));
+  const histSnap = await getDocs(q);
   histSnap.forEach((doc) => {
     history.push({ ...doc.data() });
     console.log(doc.id, " => ", doc.data());
@@ -286,20 +291,24 @@ export const getAllHistory=async()=> {
     console.log(doc.id, " => ", doc.data());
   });
   return history;
-}
+};
 export const getPaginatedStudentFiles = async (numb) => {
   const db = getFirestore();
   const studentsFiles = [];
-  var lastVisible=null
-  const firstTen=query(collection(db, "students"), orderBy("createdAt"),startAfter(lastVisible || 0), limit(numb));
-  const docSnap=await getDocs(firstTen)
-  docSnap.forEach((doc)=>{
-    studentsFiles.push({...doc.data(),id:doc.id})
-  })
-   lastVisible = docSnap.docs[docSnap.docs.length-1];
+  var lastVisible = null;
+  const firstTen = query(
+    collection(db, "students"),
+    orderBy("createdAt"),
+    startAfter(lastVisible || 0),
+    limit(numb)
+  );
+  const docSnap = await getDocs(firstTen);
+  docSnap.forEach((doc) => {
+    studentsFiles.push({ ...doc.data(), id: doc.id });
+  });
+  lastVisible = docSnap.docs[docSnap.docs.length - 1];
   // console.log("last", lastVisible);
   // const nextTen= query(collection(db, "students"),orderBy("createdAt"),startAfter(lastVisible),limit(8));
-
 
   // const fileSnap = await getDocs(collection(db, "students"));
   // fileSnap.forEach((doc) => {
@@ -308,40 +317,58 @@ export const getPaginatedStudentFiles = async (numb) => {
   // });
   return studentsFiles;
 };
-export const getFilesWithoutBirth=async()=>{
-  const db=getFirestore()
-  const studentBirths=[];
+export const getFilesWithoutBirth = async () => {
+  const db = getFirestore();
+  const studentBirths = [];
   const birthRef = collection(db, "students");
   const q = query(birthRef, where("birthcert", "==", true));
   const birthSnap = await getDocs(q);
-  birthSnap.forEach((doc)=>{
-    studentBirths.push({...doc.data(),id:doc.id})
-  })
+  birthSnap.forEach((doc) => {
+    studentBirths.push({ ...doc.data(), id: doc.id });
+  });
   return studentBirths;
+};
 
-}
-
-export const getFilesWithoutKcpe=async()=>{
-  const db=getFirestore()
-  const studentKcpe=[];
+export const getFilesWithoutKcpe = async () => {
+  const db = getFirestore();
+  const studentKcpe = [];
   const birthRef = collection(db, "students");
   const q = query(birthRef, where("kcpe", "==", true));
   const birthSnap = await getDocs(q);
-  birthSnap.forEach((doc)=>{
-    studentKcpe.push({...doc.data(),id:doc.id})
-  })
+  birthSnap.forEach((doc) => {
+    studentKcpe.push({ ...doc.data(), id: doc.id });
+  });
   return studentKcpe;
-
-}
-export const getFilesWithoutKcse=async()=>{
-  const db=getFirestore()
-  const studentKcse=[];
+};
+export const getFilesWithoutKcse = async () => {
+  const db = getFirestore();
+  const studentKcse = [];
   const birthRef = collection(db, "students");
   const q = query(birthRef, where("kcse", "==", true));
   const birthSnap = await getDocs(q);
-  birthSnap.forEach((doc)=>{
-    studentKcse.push({...doc.data(),id:doc.id})
-  })
+  birthSnap.forEach((doc) => {
+    studentKcse.push({ ...doc.data(), id: doc.id });
+  });
   return studentKcse;
-
-}
+};
+export const newUser = async () => {
+  const db = getFirestore();
+  const auth = getAuth();
+  const cred = await signInWithPopup(auth, new GoogleAuthProvider());
+  if (cred.user.email.endsWith("@ueab.ac.ke")){
+    const user = cred.user;
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      console.log('the user exits')
+    }else{
+      await setDoc(doc(db, "users", cred.user.uid), {
+        admin: false,
+        email: cred.user.email,
+        isSuperAdmin: false,
+        name:cred.user.displayName
+      });
+    }
+    
+  }
+};
