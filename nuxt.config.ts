@@ -28,6 +28,7 @@ export default defineNuxtConfig({
       '@fortawesome/fontawesome-svg-core/styles.css'
     ],
     build: {
+      
       transpile:[
         '@fortawesome/vue-fontawesome',
         '@fortawesome/fontawesome-svg-core',

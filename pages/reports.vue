@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="flex flex-col w-full">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-4">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-x-auto ">
+        <div class="inline-block min-w-full sm:px-6 lg:px-6">
           <div class="">
             <table class="w-full">
               <thead class="border-2">
@@ -47,13 +47,13 @@
                   <td
                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r flex justify-center items-center"
                   >
-                    <button
-                    @click="getAllStudentReports(report.id)"
-                      type="button"
+                    <nuxt-link :to="{name:'pdfs-id',params:{id:report.id}}"
+                    
+                      
                       class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-2"
                     >
                       PDF
-                    </button>
+                    </nuxt-link>
                     <button
                       type="button"
                       class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-2"
@@ -76,6 +76,7 @@ definePageMeta({
   layout: "admin",
   // middleware: ["auth"]
 });
+const router=useRouter()
 const reports=ref([
     {
         id:1,
@@ -107,6 +108,7 @@ const getAllStudentReports=async(index)=>{
   if(index==3){
     studentReport.value= await getFilesWithoutBirth()
     console.log('birth')
+    router.push('/pdf')
   }else if(index==4){
     studentReport.value=await getFilesWithoutKcse()
     console.log('kcse')
