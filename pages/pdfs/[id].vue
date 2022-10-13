@@ -130,6 +130,10 @@ onMounted(async()=>{
         console.log('not yet');
     }else if(val==3){
         reports.value=await getFilesWithoutBirth()
+    }else if(val==4){
+        reports.value=await getFilesWithoutKcse()
+    }else if(val==5){
+        reports.value=await getFilesWithoutKcpe()
     }
     
 })
