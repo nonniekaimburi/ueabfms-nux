@@ -105,7 +105,10 @@
                   class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   v-if="student.sclid.length > 11"
                   >
-                  {{ student.sclid.slice(0,11) }}...
+                  <nuxt-link :to="{name:'studen-id',params:{id:student.id}}" >
+                    {{ student.sclid.slice(0,11) }}...
+                  </nuxt-link>
+                  
                 </td>
                 <td
                   class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
