@@ -30,8 +30,8 @@
     </div>
   </div>
     <div class="flex flex-col w-full ">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-4">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class=" ">
+        <div class=" inline-block w-full sm:px-6 lg:px-4">
           <div class="">
             <table class="w-full">
               <thead class="border-2">
@@ -101,13 +101,17 @@
                     class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-if="student.sclid.length > 11"
                     >
-                    {{ student.sclid.slice(0,11) }}...
+                    <nuxt-link :to="{name:'stude-id',params:{id:student.id}}">
+                      {{ student.sclid.slice(0,11) }}...
+                    </nuxt-link>
                   </td>
                   <td
                     class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-else
                     >
-                    {{ student.sclid.slice(0,11) }} 
+                    <nuxt-link :to="{name:'stude-id',params:{id:student.id}}">
+                      {{ student.sclid.slice(0,11) }}
+                    </nuxt-link>
                   </td>
                   <td
                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
