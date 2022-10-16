@@ -28,9 +28,12 @@
                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r-2">{{user.email}}</td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap first-letter border-r-2">{{user.admin}}</td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r-2 w-36">
-                      <button class="px-4 bg-orange-500 rounded py-2 mx-2" @click="openModal">
+                      <button v-if="user.admin" class="px-4 bg-orange-500 rounded py-2 mx-2" @click="openModal">
                        <span>Restrict</span>
                       </button>
+                      <button v-if="!user.admin" class="px-4 bg-orange-500 rounded py-2 mx-2" @click="openModal">
+                        <span>UnRestrict</span>
+                       </button>
                       <nuxt-link :to="{name:'user-id',params:{id:user.id}}" class="px-4 bg-green-500 rounded py-2 mx-2">
                         <span class="text-white font-normal">History</span>
                       </nuxt-link>
@@ -77,11 +80,20 @@
                                 </div>
                                 <div class="mt-4 flex justify-between">
                                   <button
+                                  v-if="user.admin==true"
                                     type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
                                     @click="handleUpdateAdmin(user.id)"
                                   >
                                     Permanently
+                                  </button>
+                                  <button
+                                  v-if="user.admin==false"
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                                    @click="handleUpdateAdmin(user.id)"
+                                  >
+                                    Unrestrict
                                   </button>
                                   <button
                                     type="button"
@@ -127,8 +139,12 @@ const closeModal = () => {
 const openModal = () => {
   isOpen.value = true;
 };
+
+const isUpdated=ref(false)
 const handleUpdateAdmin=async(id)=>{
-  await updaUseDoc(id,true)
+  isUpdated.value=!isUpdated.value
+
+  await updaUseDoc(id,isUpdated.value)
   isOpen.value = false;
 }
 // const handleRestrict=async(id,email)=>{

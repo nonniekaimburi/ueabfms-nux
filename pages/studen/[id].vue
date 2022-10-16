@@ -98,7 +98,7 @@
         </div>
       </div>
       <div>
-        <br><router-link :to="{ path: '/tableview' }"><button class="bg-blue-700 text-white font-normal py-2 px-2 ml-10 mt-4">Go Back</button></router-link>
+        <br><router-link :to="{ path: '/student' }"><button class="bg-blue-700 text-white font-normal py-2 px-2 ml-10 mt-4">Go Back</button></router-link>
       </div>
     </div>
   </template>
