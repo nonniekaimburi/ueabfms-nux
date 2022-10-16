@@ -89,7 +89,7 @@
       </div>
     </div>
     <div>
-      <br /><router-link  :to="{ path: '/tableview' }" class="bg-blue-600 text-white text-sm px-2 py-2 rounded">Go Back</router-link >
+      <br /><router-link  :to="{ path: '/students' }" class="bg-blue-600 text-white text-sm px-2 py-2 rounded">Go Back</router-link >
     </div>
   </template>
   

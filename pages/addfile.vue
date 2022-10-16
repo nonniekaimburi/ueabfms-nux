@@ -222,7 +222,7 @@ definePageMeta({
 const router = useRouter();
 
 const schools = ref([]);
-const s_sclid = ref("");
+const s_sclid = ref(null);
 const s_addition = ref("");
 const s_addition1 = ref("");
 const s_addition2 = ref("");
@@ -231,23 +231,17 @@ const s_appform = ref("");
 const s_kcpe = ref("");
 const s_kcse = ref("");
 const s_birthcert = ref("");
-const s_firstname = ref("");
-const s_lastname = ref("");
-const s_middlename = ref("");
-const s_location = ref("");
-const s_school = ref("");
+const s_firstname = ref(null);
+const s_lastname = ref(null);
+const s_middlename = ref(null);
+const s_location = ref(null);
+const s_school = ref(null);
 
 const errorMsg=ref(false)
 
 const handleAddStudent = async () => {
   console.log("clicked");
-  if(s_sclid.value =="" && s_lastname.value =="" && s_firstname.value =="" && s_middlename.value =="" && s_school.value =="" && s_location.value ==""){
-    
-   console.log('empty fields')
-   errorMsg.value=true
-  }else{
-    console.log("clicked after if");
-    errorMsg.value=false
+  if(s_sclid.value && s_lastname.value && s_firstname.value && s_middlename.value && s_school.value && s_location.value){
     await addNewStudentFile(
       s_sclid.value,
       s_lastname.value,
@@ -265,6 +259,12 @@ const handleAddStudent = async () => {
       s_appform.value
     );
     router.push("/tableview");
+    console.log("clicked after if");
+    errorMsg.value=false
+  }else{
+    
+    console.log('empty fields')
+   errorMsg.value=true
     console.log(s_school.value);
   }
   
