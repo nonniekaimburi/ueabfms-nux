@@ -7,7 +7,7 @@
       <font-awesome-icon icon="fa-solid fa-plus" class="text-white" />
       <span class="text-white">Add File</span>
     </router-link>
-    <!-- <table1 :columns="columns" :entries="students" /> -->
+    
     <div class="flex justify-between">
       <div class="mt-4 mx-4 flex items-center">
         <p class="text-sm text-black font-normal px-2">Show</p>
@@ -33,46 +33,46 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col w-full">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-4">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+    <div class="flex  w-full">
+      <div class="overflow-x-auto">
+        <div class="py-2 inline-block w-full">
           <div class="">
-            <table class="w-full">
+            <table class=" table-fixed">
               <thead class="border-2">
                 <tr>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     No.
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Student Id
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Last name
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     First name
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Middle name
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     School
                   </th>
@@ -84,7 +84,7 @@
                     </th> -->
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Action
                   </th>
@@ -97,12 +97,12 @@
                   :key="index"
                 >
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ index + 1 }}
                   </td>
                   <td
-                  class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                  class="uppercase text px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   v-if="student.sclid.length > 11"
                   >
                   <nuxt-link :to="{name:'studen-id',params:{id:student.id}}" >
@@ -111,34 +111,36 @@
                   
                 </td>
                 <td
-                  class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                  class="uppercase text px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   v-else
                   >
-                  {{ student.sclid.slice(0,11) }} 
+                  <nuxt-link :to="{name:'studen-id',params:{id:student.id}}" >
+                    {{ student.sclid.slice(0,11) }}
+                  </nuxt-link>
                 </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ student.Lastname }}
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ student.Firstname }}
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ student.Middlename }}
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-if="student.school.length > 21"
                   >
                     {{ student.school.slice(0, 20) }}...
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-else
                   >
                     {{ student.school.slice(0, 20) }}
@@ -249,7 +251,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
 definePageMeta({
   layout: "normal",
-  middleware: ["auth"]
+  // middleware: ["auth"]
 });
 const router = useRouter();
 const students = ref([]);
@@ -271,13 +273,14 @@ const searchedfiles = computed(() => {
 const users = ref([]);
 onMounted(async () => {
   students.value = await getPaginatedStudentFiles(currentPage.value);
-  users.value = listAllUsers();
+  
   console.log(users.value);
 });
 const handleNext = async () => {
   console.log("going to next");
   students.value = await getPaginatedStudentFiles(currentPage.value);
 };
+
 </script>
 
 <style scoped></style>

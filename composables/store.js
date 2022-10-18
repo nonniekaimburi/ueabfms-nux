@@ -2,8 +2,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import {
   addDoc,
   collection,
-  doc,
-  getDoc,
+  doc, getDoc,
   getDocs,
   getFirestore,
   limit,
@@ -300,7 +299,8 @@ export const getPaginatedStudentFiles = async (numb) => {
     collection(db, "students"),
     orderBy("createdAt"),
     startAfter(lastVisible || 0),
-    limit(numb)
+    limit(numb),
+    // endAt(numb)
   );
   const docSnap = await getDocs(firstTen);
   docSnap.forEach((doc) => {
