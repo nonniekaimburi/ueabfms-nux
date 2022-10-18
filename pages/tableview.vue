@@ -38,37 +38,37 @@
                 <tr>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     No.
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Student Id
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Last name
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     First name
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Middle name
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     School
                   </th>
@@ -80,7 +80,7 @@
                   </th> -->
                   <th
                     scope="col"
-                    class="text-sm font-medium text-blue-600 px-6 py-4 text-left border-r"
+                    class="text-sm font-medium text-blue-600 px-3 py-4 text-left border-r"
                   >
                     Action
                   </th>
@@ -93,12 +93,12 @@
                   :key="index"
                 >
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ index + 1 }}
                   </td>
                   <td
-                    class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="uppercase text px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-if="student.sclid.length > 11"
                     >
                     <nuxt-link :to="{name:'stude-id',params:{id:student.id}}">
@@ -106,7 +106,7 @@
                     </nuxt-link>
                   </td>
                   <td
-                    class="uppercase text px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="uppercase text px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-else
                     >
                     <nuxt-link :to="{name:'stude-id',params:{id:student.id}}">
@@ -114,28 +114,28 @@
                     </nuxt-link>
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ student.Lastname }}
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ student.Firstname }}
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                   >
                     {{ student.Middlename }}
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-if="student.school.length > 21"
                   >
                     {{ student.school.slice(0, 20) }}...
                   </td>
                   <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
+                    class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
                     v-else
                   >
                     {{ student.school.slice(0, 20) }}

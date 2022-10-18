@@ -24,12 +24,14 @@ export default defineNuxtConfig({
       }
     },
     css: [
+      'vuetify/lib/styles/main.sass',
       "~/assets/css/styles.css",
       '@fortawesome/fontawesome-svg-core/styles.css'
     ],
     build: {
       
       transpile:[
+        'vuetify',
         '@fortawesome/vue-fontawesome',
         '@fortawesome/fontawesome-svg-core',
         '@fortawesome/pro-solid-svg-icons',

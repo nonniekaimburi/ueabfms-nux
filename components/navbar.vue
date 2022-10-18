@@ -17,7 +17,7 @@
             <img
               class="w-12 h-12 rounded-full"
               alt="avatar"
-              src="https://cdn.pixabay.com/photo/2013/06/14/18/13/girl-139353__340.jpg"
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
             />
           </span>
         </PopoverButton>
@@ -37,11 +37,11 @@
               class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5"
             >
               <div class="relative grid gap-8 bg-white p-7 lg:grid-cols-1">
-                <a
+                <!-- <a
                   class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                   href="/analytics"
                   >Accounts</a
-                >
+                > -->
                 <div
                   v-if="firebaseUser"
                   @click="handleSignout"
