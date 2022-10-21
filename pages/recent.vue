@@ -3,6 +3,14 @@
       <p class="font-bold text-2xl">
         <span class="text-primary">Recent </span>Activity
       </p>
+      <div class="w-72">
+        <input
+          v-model="search"
+          type="text"
+          placeholder="search in recent"
+          class="border border-gray-300 rounded-lg block w-full p-2.5 text-gray-900"
+        />
+      </div>
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -43,7 +51,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-2" v-for="(histo,index) in histos" :key="index">
+                  <tr class="border-2" v-for="(histo,index) in searchedhists" :key="index">
                     <td
                       class="px-6 py-2 whitespace-nowrap text-sm font-normal text-gray-600 border-r"
                     >
@@ -86,16 +94,20 @@
   <script setup>
   definePageMeta({
     layout: "admin",
-    middleware: ["auth"]
+    // middleware: ["auth"]
   });
   const histos = ref([]);
   const time=new Date()
   
+  const search = ref("");
   onMounted(async () => {
     histos.value = await getRecentHistory();
   
     console.log(histos.value);
     console.log(time)
   });
+  const searchedhists = computed(() => {
+  return histos.value.filter((hist) => hist.sclid.match(search.value));
+});
   </script>
   
