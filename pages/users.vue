@@ -11,6 +11,8 @@
     
 
     <div>
+      <p class="text-blue-700 text-lg font-normal" v-if="isRestricted">The user has been restricted successfully</p>
+      <p class="text-blue-700 text-lg font-normal" v-if="isUnrestricted">The user has been Unrestricted successfully</p>
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -19,20 +21,26 @@
                 <thead class="border">
                   <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r-2">No.</th>
                   <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r-2">user email</th>
-                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r-2">is Admin</th>
+                  <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r-2">is Admin</th> -->
                   <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r-2">Action</th>
                 </thead>
                 <tbody>
                   <tr class="border" v-for="(user,index) in users" :key="index">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r-2">{{index +1}}</td>
                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r-2">{{user.email}}</td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap first-letter border-r-2">{{user.admin}}</td>
+                    <!-- <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap first-letter border-r-2">{{user.admin}}</td> -->
                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r-2 w-36">
-                      <button v-if="user.admin" class="px-4 bg-orange-500 rounded py-2 mx-2" @click="openModal">
+                      <button v-if="!user.isBanned" class="px-4 bg-orange-500 rounded py-2 mx-2" @click="handleUpdateAdmin(user.id)">
                        <span>Restrict</span>
                       </button>
-                      <button v-if="!user.admin" class="px-4 bg-orange-500 rounded py-2 mx-2" @click="openModal">
+                      <button v-if="user.isBanned" class="px-4 bg-orange-500 rounded py-2 mx-2" @click="handleUnRestrictUser(user.id)">
                         <span>UnRestrict</span>
+                       </button>
+                       <button v-if="!user.isForbidded" class="px-4 bg-orange-800 rounded py-2 mx-2" @click="handleForbidUser(user.id)">
+                        <span class="text-white">Forbid</span>
+                       </button>
+                       <button v-if="user.isForbidded" class="px-4 bg-orange-800 rounded py-2 mx-2">
+                        <span class="text-white">Forbidden</span>
                        </button>
                       <nuxt-link :to="{name:'user-id',params:{id:user.id}}" class="px-4 bg-green-500 rounded py-2 mx-2">
                         <span class="text-white font-normal">History</span>
@@ -132,6 +140,8 @@ definePageMeta({
     layout: "admin",
     // middleware: ["auth"]
   });
+  const isRestricted=ref(false)
+  const isUnrestricted=ref(false)
 const isOpen = ref(false);
 const closeModal = () => {
   isOpen.value = false;
@@ -142,15 +152,19 @@ const openModal = () => {
 
 const isUpdated=ref(false)
 const handleUpdateAdmin=async(id)=>{
-  isUpdated.value=!isUpdated.value
+ 
 
-  await updaUseDoc(id,isUpdated.value)
-  isOpen.value = false;
+  await updaUseDoc(id)
+  isRestricted.value=true
+  // isOpen.value = false;
 }
-// const handleRestrict=async(id,email)=>{
-//     await restrictUser(id,email)
-//     isOpen.value = false;
-// }
+const handleUnRestrictUser=async(id)=>{
+  await unRestrictUser(id)
+  isUnrestricted.value=true
+}
+const handleForbidUser=async(id)=>{
+  await forbidUser(id)
+}
 const handleUsers=async()=>{
   await newUser()
 }

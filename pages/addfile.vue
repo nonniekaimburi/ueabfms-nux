@@ -6,7 +6,7 @@
     </p>
       <p class="text-red-600 text-lg font-normal" v-if="errorMsg">Some required fields have not been field up</p>
     <div class="flex">
-      <div class="m-2 bg-white border" id="custome">
+      <div class="m-2 bg-white border rounded-md" id="custome">
         <div class="px-4">
           <div class="flex justify-between">
             <div class="mb-4 w-full mt-2">
@@ -97,8 +97,8 @@
           </div>
         </div>
       </div>
-      <div class="bg-white m-2 h-min border" id="rightCustome">
-        <h3 class="px-4 text-purple-900 text-sm py-2 border">
+      <div class="bg-white m-2 h-min border rounded-lg" id="rightCustome">
+        <h3 class="px-4 text-purple-900 text-sm py-2">
           Available forms
         </h3>
         <div class="px-4">

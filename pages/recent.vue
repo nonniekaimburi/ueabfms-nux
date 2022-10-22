@@ -3,6 +3,29 @@
       <p class="font-bold text-2xl">
         <span class="text-primary">Recent </span>Activity
       </p>
+     <div class="flex justify-between items-center">
+      <div class="mt-4 mx-4 flex items-center">
+        <p class="text-sm text-black font-normal px-2">Show</p>
+        <select
+          v-model="currentPage"
+         
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-20 p-2.5"
+        >
+          <option v-for="entry in showEnties" :key="entry" :value="entry">
+            {{ entry }}
+          </option>
+        </select>
+        <p class="text-sm text-black font-normal px-2">Entries</p>
+      </div>
+      <div class="w-72">
+        <input
+          v-model="search"
+          type="text"
+          placeholder="search in recent"
+          class="border border-gray-300 rounded-lg block w-full p-2.5 text-gray-900"
+        />
+      </div>
+     </div>
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -43,7 +66,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-2" v-for="(histo,index) in histos" :key="index">
+                  <tr class="border-2" v-for="(histo,index) in searchedhists" :key="index">
                     <td
                       class="px-6 py-2 whitespace-nowrap text-sm font-normal text-gray-600 border-r"
                     >
@@ -86,16 +109,22 @@
   <script setup>
   definePageMeta({
     layout: "admin",
-    middleware: ["auth"]
+    // middleware: ["auth"]
   });
   const histos = ref([]);
   const time=new Date()
   
+  const search = ref("");
+  const showEnties = ref([5, 10, 15, 20]);
+const currentPage = ref(5);
   onMounted(async () => {
     histos.value = await getRecentHistory();
   
     console.log(histos.value);
     console.log(time)
   });
+  const searchedhists = computed(() => {
+  return histos.value.filter((hist) => hist.sclid.match(search.value));
+});
   </script>
   

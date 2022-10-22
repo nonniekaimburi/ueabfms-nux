@@ -70,7 +70,7 @@ const handleLogin = async () => {
     if (userRedirect.value.admin) {
       router.push("/landingAd");
       isAdmin.value = true;
-    } else if (userRedirect.value.isBanned) {
+    } else if (userRedirect.value.isBanned || userRedirect.value.isForbidden) {
       isBanned.value = true;
     } else if(!userRedirect.value.admin) {
       console.log("logged in");

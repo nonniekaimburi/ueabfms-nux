@@ -16,7 +16,7 @@
           v-for="(school, index) in schools"
           :key="index"
         >
-          <router-link :to="{name:'schools-id',params:{id: school.id} }">
+          <router-link :to="{name:'schoolsn-id',params:{id: school.id} }">
             <h4 class="font-normal px-4 py-2 hover:bg-blue-200 cursor-pointer">
               {{ school.name }}
             </h4>

@@ -221,11 +221,25 @@ export const getAllUsers = async () => {
   });
   return users;
 };
-export const updaUseDoc = async (id, admin) => {
+export const updaUseDoc = async (id) => {
   const db = getFirestore();
   const userRef = doc(db, "users", id);
   await updateDoc(userRef, {
-    isBanned: isBanned,
+    isBanned: true,
+  });
+};
+export const unRestrictUser = async (id) => {
+  const db = getFirestore();
+  const userRef = doc(db, "users", id);
+  await updateDoc(userRef, {
+    isBanned: false,
+  });
+};
+export const forbidUser = async (id) => {
+  const db = getFirestore();
+  const userRef = doc(db, "users", id);
+  await updateDoc(userRef, {
+    isForbidden: true,
   });
 };
 export const restrictUser = async (id, email) => {
@@ -366,7 +380,9 @@ export const newUser = async () => {
         admin: false,
         email: cred.user.email,
         isSuperAdmin: false,
-        name:cred.user.displayName
+        name:cred.user.displayName,
+        isBanned:false,
+        isForbidded:false
       });
     }
     
