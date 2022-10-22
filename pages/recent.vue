@@ -3,6 +3,20 @@
       <p class="font-bold text-2xl">
         <span class="text-primary">Recent </span>Activity
       </p>
+     <div class="flex justify-between items-center">
+      <div class="mt-4 mx-4 flex items-center">
+        <p class="text-sm text-black font-normal px-2">Show</p>
+        <select
+          v-model="currentPage"
+         
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-20 p-2.5"
+        >
+          <option v-for="entry in showEnties" :key="entry" :value="entry">
+            {{ entry }}
+          </option>
+        </select>
+        <p class="text-sm text-black font-normal px-2">Entries</p>
+      </div>
       <div class="w-72">
         <input
           v-model="search"
@@ -11,6 +25,7 @@
           class="border border-gray-300 rounded-lg block w-full p-2.5 text-gray-900"
         />
       </div>
+     </div>
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -100,6 +115,8 @@
   const time=new Date()
   
   const search = ref("");
+  const showEnties = ref([5, 10, 15, 20]);
+const currentPage = ref(5);
   onMounted(async () => {
     histos.value = await getRecentHistory();
   

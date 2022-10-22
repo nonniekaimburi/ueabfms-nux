@@ -33,11 +33,11 @@
         </div>
       </div>
     </div>
-    <div class="flex  w-full">
-      <div class="overflow-x-auto">
-        <div class="py-2 inline-block w-full">
+    <div class="flex  flex-col w-full">
+      <div class="">
+        <div class="inline-block w-full sm:px-6 lg:px-4">
           <div class="">
-            <table class=" table-fixed">
+            <table class="w-full">
               <thead class="border-2">
                 <tr>
                   <th
@@ -189,7 +189,7 @@
                                       active
                                         ? 'bg-violet-500 text-black'
                                         : 'text-gray-900',
-                                      'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                      'group flex w-44 items-center rounded-md px-2 py-2 text-sm',
                                     ]"
                                   >
                                     Retrieve
@@ -205,7 +205,7 @@
                                       active
                                         ? 'bg-violet-500 text-white'
                                         : 'text-gray-900',
-                                      'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                      'group flex w-44 items-center rounded-md px-2 py-2 text-sm',
                                     ]"
                                   >
                                     Return
@@ -223,7 +223,7 @@
                                       active
                                         ? 'bg-violet-500 text-white'
                                         : 'text-gray-900',
-                                      'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                      'group flex w-44 items-center rounded-md px-2 py-2 text-sm',
                                     ]"
                                   >
                                     History

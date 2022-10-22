@@ -239,7 +239,7 @@ export const forbidUser = async (id) => {
   const db = getFirestore();
   const userRef = doc(db, "users", id);
   await updateDoc(userRef, {
-    isForbidded: true,
+    isForbidden: true,
   });
 };
 export const restrictUser = async (id, email) => {
