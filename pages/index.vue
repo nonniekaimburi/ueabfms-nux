@@ -6,6 +6,18 @@
       <h3 class="text-red-600 text-2xl font-normal" v-if="isBanned">
         You have been restricted access, visit registrar for details
       </h3>
+      <div v-if="isRegistered" class="flex flex-col items-center justify-center">
+        <h3 class="text-red-600 text-2xl font-normal">
+          You are not registered to this system,please see registra for details
+        </h3>
+        <button
+          @click="handleLogin"
+          type="button"
+          class="mt-8 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+        >
+          Login
+        </button>
+      </div>
       <button
         v-if="!firebaseUser"
         @click="handleLogin"
@@ -50,8 +62,9 @@ const router = useRouter();
 const firebaseUser = useFirebaseUser();
 const isBanned = ref(false);
 const isAdmin = ref(false);
-const notAdmin=ref(false)
-const isNotAllowed=ref(false)
+const notAdmin = ref(false);
+const isNotAllowed = ref(false);
+const isRegistered = ref(false);
 
 const db = ref(null);
 onMounted(async () => {
@@ -60,29 +73,33 @@ onMounted(async () => {
 });
 const handleLogin = async () => {
   const cred = await signIn();
-  if(cred.user.email.endsWith('ueab.ac.ke')){
+  if (cred.user.email.endsWith("ueab.ac.ke")) {
     const user = cred.user;
-  const userRedirect = ref(null);
-  const docRef = doc(db.value, "users", user.uid);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    userRedirect.value = docSnap.data();
-    if (userRedirect.value.admin) {
-      router.push("/landingAd");
-      isAdmin.value = true;
-    } else if (userRedirect.value.isBanned || userRedirect.value.isForbidden) {
-      isBanned.value = true;
-    } else if(!userRedirect.value.admin) {
-      console.log("logged in");
-      // isLoggedIn.value = true;
-      notAdmin.value = false;
-      router.push("/landing");
+    const userRedirect = ref(null);
+    const docRef = doc(db.value, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      userRedirect.value = docSnap.data();
+      if (userRedirect.value.admin) {
+        router.push("/landingAd");
+        isAdmin.value = true;
+      } else if (
+        userRedirect.value.isBanned ||
+        userRedirect.value.isForbidden
+      ) {
+        isBanned.value = true;
+      } else if (!userRedirect.value.admin) {
+        console.log("logged in");
+        // isLoggedIn.value = true;
+        notAdmin.value = false;
+        router.push("/landing");
+      }
+    } else {
+      isRegistered.value = true;
     }
+  } else {
+    isNotAllowed.value = true;
   }
-  }else{
-    isNotAllowed.value=true
-  }
-  
 };
 </script>
 

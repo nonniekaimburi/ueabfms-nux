@@ -90,7 +90,7 @@
   
   definePageMeta({
     layout: "admin",
-    middleware: ["auth"]
+    // middleware: ["auth"]
   });
   const students=ref([])
   const history=ref([])

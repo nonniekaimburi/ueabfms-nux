@@ -5,8 +5,7 @@ import {
   doc, getDoc,
   getDocs,
   getFirestore,
-  limit,
-  orderBy,
+  limit, orderBy,
   query,
   setDoc,
   startAfter,
@@ -204,9 +203,17 @@ export const getRecentHistory = async () => {
   return histo;
 };
 
-export const getAllUsers = async () => {
+export const getAllUsers =  async() => {
   const db = getFirestore();
   const users = [];
+  // const q=query(collection(db,'users'))
+  // const unsub= onSnapshot(q,(querySnap)=>{
+  //   querySnap.forEach((doc)=>{
+  //     users.push({ ...doc.data(), id: doc.id });
+      
+  //   })
+  //   console.log(users)
+  // })
   const userSnap = await getDocs(collection(db, "users"));
   userSnap.forEach((doc) => {
     users.push({ ...doc.data(), id: doc.id });
@@ -267,18 +274,6 @@ export const getAdminUsers = async () => {
   const adminRef = collection(db, "users");
   const q = query(adminRef, where("state", "==", true));
 };
-//  export const listAllUser=async(nextPageToken)=>{
-//   admin.auth().listUsers(1000,nextPageToken).then((listUsersResult)=>{
-//       listUsersResult.users.forEach((userRecord)=>{
-//           console.log('User',userRecord.toJSON());
-//       });
-//       if(listUsersResult.pageToken){
-//           // listAllUsers(listUsersResult.pageToken);
-//       }
-//   }).catch((error)=>{
-//       console.log('Error listing user record',error)
-//   })
-// }
 export const getAllHistory = async () => {
   const db = getFirestore();
   const history = [];
@@ -390,8 +385,6 @@ export const newUser = async () => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      console.log('the user exits')
-    }else{
       await setDoc(doc(db, "users", cred.user.uid), {
         admin: false,
         email: cred.user.email,
@@ -400,6 +393,9 @@ export const newUser = async () => {
         isBanned:false,
         isForbidded:false
       });
+      
+    }else{
+      console.log('the user exits')
     }
     
   }

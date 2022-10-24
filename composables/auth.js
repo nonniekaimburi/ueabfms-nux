@@ -1,5 +1,5 @@
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useFirebaseUser } from "./useState";
 
 export const signIn = async () => {
@@ -12,14 +12,15 @@ export const signIn = async () => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      await setDoc(doc(db, "users", cred.user.uid), {
-        admin: false,
-        email: cred.user.email,
-        isSuperAdmin: false,
-        isBanned:false,
-        isForbidden:false,
-        name: cred.user.displayName,
-      });
+      // await setDoc(doc(db, "users", cred.user.uid), {
+      //   admin: false,
+      //   email: cred.user.email,
+      //   isSuperAdmin: false,
+      //   isBanned:false,
+      //   isForbidden:false,
+      //   name: cred.user.displayName,
+      // });
+      console.log("the user is not registered to access the system")
     }
   }
   return cred
