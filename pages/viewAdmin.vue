@@ -1,11 +1,11 @@
 <template>
     <div class="flex justify-between">
         <div>
-          <p class="font-bold text-2xl"><span class="text-primary">Users</span> view</p>
+          <p class="font-bold text-2xl"><span class="text-primary">Admin</span> view</p>
         </div>
         <button @click="handleUsers" class=" px-4 right-0 bg-blue-600 py-2 rounded text-white">
           <font-awesome-icon icon="fa-solid fa-plus" />
-          <span class="text-sm">Add User</span>
+          <span class="text-sm">Add Admin</span>
       </button>
     </div>
     

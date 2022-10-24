@@ -21,7 +21,7 @@
         <input
           v-model="search"
           type="text"
-          placeholder="search in recent"
+          placeholder="Search in Recent"
           class="border border-gray-300 rounded-lg block w-full p-2.5 text-gray-900"
         />
       </div>
@@ -121,6 +121,9 @@ const currentPage = ref(5);
     histos.value = await getRecentHistory();
   
     console.log(histos.value);
+    histos.value.forEach((e)=>{
+      console.log(e.file.includes('KCPE'))
+    })
     console.log(time)
   });
   const searchedhists = computed(() => {

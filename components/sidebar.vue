@@ -18,7 +18,7 @@
           <li>
             <nuxt-link
               to="/landing"
-              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 bg-gray-200 focus:shadow-outline"
+              class="flex items-center space-x-3 text-gray-700 p-2 rounded-md font-medium hover:bg-gray-200 focus:shadow-outline"
             >
              <font-awesome-icon icon="fa-solid fa-home" />
               <span>Home</span>
@@ -88,4 +88,10 @@
   };
   </script>
   
-  <style scoped></style>
+  <style scoped>
+.router-link-exact-active{
+  background-color: blue;
+  color: white;
+}
+
+</style>

@@ -6,7 +6,7 @@
       <div class="flex justify-between items-center pt-4 px-4">
        
         <router-link to="/landingAd" class="flex items-center p-6 w-80 bg-gray-800 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <font-awesome-icon icon="fa-solid fa-files" class="text-3xl text-orange-400 px-4" />
+          <font-awesome-icon icon="fa fa-file" class="text-3xl text-orange-400 px-4" />
           <div 
             class="flex flex-col items-center "
           >
@@ -44,7 +44,7 @@
       </div>
       <div class="flex justify-between items-center pt-4 px-4">
         <router-link to="/recent" class="w-80">
-          <font-awesome-icon icon="fa fa-file-o" class="text-3xl text-orange-400 px-4" />
+          <font-awesome-icon icon="fa fa-files-o" class="text-3xl text-orange-400 px-4" />
           <div
             class="flex items-center flex-col p-6 w-full bg-gray-800 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
           >
