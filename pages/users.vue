@@ -171,5 +171,7 @@ const handleUsers=async()=>{
 const users=ref([])
 onMounted(async()=>{
   users.value=await getAllUsers()
+  console.log(users.value);
+  console.log(getAllUsers());
 })
 </script>
