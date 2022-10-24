@@ -1,7 +1,7 @@
 <template>
   <div v-if="school">
     <h3 class="text-2xl font-normal px-6 py-6 text-orange-500">
-      {{ school.name }} students
+      {{ school.name }} STUDENT
     </h3>
     <div class="flex flex-col">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">

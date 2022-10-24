@@ -12,7 +12,7 @@
                 <h3 class="font-normal text-2xl text-black uppercase">University of Eastern Africa, Baraton</h3>
             </div>
             <div>
-                <h3 class="font-normal text-2xl text-black uppercase">Files Without Birth Certificates</h3>
+                <h3 class="font-normal text-2xl text-black uppercase">Files  {{title}}</h3>
             </div>
         </div>
         <div class="flex flex-col w-full ">
@@ -119,21 +119,31 @@
 const jsondata=ref()
 const route=useRoute()
 const reports=ref([])
+const histos=ref([])
 
 const val=route.params.id
+const title=ref('')
 
 
 onMounted(async()=>{
     if(val==1){
-        console.log('nothing')
+      title.value="Present"
+      reports.value=await getAllStudentFiles()
     }else if(val==2){
+      title.value="Absent"
         console.log('not yet');
     }else if(val==3){
+      title.value="Without Birth certificates"
         reports.value=await getFilesWithoutBirth()
     }else if(val==4){
+      title.value="Without KCSE certificates"
         reports.value=await getFilesWithoutKcse()
     }else if(val==5){
         reports.value=await getFilesWithoutKcpe()
+      title.value="Without KCPE certificates"
+    }else if(val==6){
+        reports.value=await getFilesWithouApplication()
+      title.value="Without Application form"
     }
     
 })

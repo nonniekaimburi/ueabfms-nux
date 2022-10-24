@@ -58,7 +58,7 @@
                 <tbody>
                   <tr
                     class="border-2"
-                    v-for="(student, index) in students"
+                    v-for="(student, index) in Students"
                     :key="index"
                   >
                     <td

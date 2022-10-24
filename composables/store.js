@@ -103,21 +103,14 @@ export const getAllStudentFiles = async () => {
     collection(db, "students"),
     orderBy("createdAt"),
     startAfter(lastVisible || 0),
-    limit(8)
+    limit(20)
   );
   const docSnap = await getDocs(firstTen);
   docSnap.forEach((doc) => {
     studentsFiles.push({ ...doc.data(), id: doc.id });
   });
   lastVisible = docSnap.docs[docSnap.docs.length - 1];
-  // console.log("last", lastVisible);
-  // const nextTen= query(collection(db, "students"),orderBy("createdAt"),startAfter(lastVisible),limit(8));
-
-  // const fileSnap = await getDocs(collection(db, "students"));
-  // fileSnap.forEach((doc) => {
-  //   studentsFiles.push({ ...doc.data(), id: doc.id });
-  //   console.log(doc.id, " => ", doc.data());
-  // });
+ 
   return studentsFiles;
 };
 export const getSingleStudent = async (id) => {
@@ -331,6 +324,7 @@ export const getPaginatedStudentFiles = async (numb) => {
   // });
   return studentsFiles;
 };
+
 export const getFilesWithoutBirth = async () => {
   const db = getFirestore();
   const studentBirths = [];
@@ -359,6 +353,28 @@ export const getFilesWithoutKcse = async () => {
   const studentKcse = [];
   const birthRef = collection(db, "students");
   const q = query(birthRef, where("kcse", "==", true));
+  const birthSnap = await getDocs(q);
+  birthSnap.forEach((doc) => {
+    studentKcse.push({ ...doc.data(), id: doc.id });
+  });
+  return studentKcse;
+};
+export const getFilesWithouApplication = async () => {
+  const db = getFirestore();
+  const studentKcse = [];
+  const birthRef = collection(db, "students");
+  const q = query(birthRef, where("kcse", "==", true));
+  const birthSnap = await getDocs(q);
+  birthSnap.forEach((doc) => {
+    studentKcse.push({ ...doc.data(), id: doc.id });
+  });
+  return studentKcse;
+};
+export const getFilesPresent = async () => {
+  const db = getFirestore();
+  const studentKcse = [];
+  const birthRef = collection(db, "students");
+  const q = query(birthRef, where("appform", "==", true,));
   const birthSnap = await getDocs(q);
   birthSnap.forEach((doc) => {
     studentKcse.push({ ...doc.data(), id: doc.id });

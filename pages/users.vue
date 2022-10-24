@@ -36,10 +36,10 @@
                       <button v-if="user.isBanned" class="px-4 bg-orange-500 rounded py-2 mx-2" @click="handleUnRestrictUser(user.id)">
                         <span>UnRestrict</span>
                        </button>
-                       <button v-if="!user.isForbidded" class="px-4 bg-orange-800 rounded py-2 mx-2" @click="handleForbidUser(user.id)">
+                       <button v-if="!user.isForbidden" class="px-4 bg-orange-800 rounded py-2 mx-2" @click="handleForbidUser(user.id)">
                         <span class="text-white">Forbid</span>
                        </button>
-                       <button v-if="user.isForbidded" class="px-4 bg-orange-800 rounded py-2 mx-2">
+                       <button v-if="user.isForbidden" class="px-4 bg-orange-800 rounded py-2 mx-2">
                         <span class="text-white">Forbidden</span>
                        </button>
                       <nuxt-link :to="{name:'user-id',params:{id:user.id}}" class="px-4 bg-green-500 rounded py-2 mx-2">

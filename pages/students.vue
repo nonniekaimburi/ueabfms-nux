@@ -27,7 +27,7 @@
           <input
             v-model="search"
             type="text"
-            placeholder="search in projects"
+            placeholder="Search in Files"
             class="border border-gray-300 rounded-lg block w-full p-2.5 text-gray-900"
           />
         </div>
