@@ -17,7 +17,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
-    "@headlessui/vue": "^1.7.3",
+    "@headlessui/vue": "^1.7.14",
     "alga-css": "^1.0.0-ruby-7",
     "alga-js": "^0.1.0-stone-9",
     "emailjs-com": "^3.2.0",
