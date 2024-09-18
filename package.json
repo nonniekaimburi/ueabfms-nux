@@ -24,7 +24,7 @@
     "firebase": "^9.10.0",
     "firebase-admin": "^11.0.1",
     "firebase-functions": "^3.24.1",
-    "sass": "^1.55.0",
+    "sass": "^1.79.0",
     "vuetify": "^3.0.0-beta.13"
   }
 }
